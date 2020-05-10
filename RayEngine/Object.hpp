@@ -2,6 +2,7 @@
 #define OBJECT_HPP
 
 #include "masterInclude.hpp"
+#include "Color.hpp"
 
 class Object{
 private:

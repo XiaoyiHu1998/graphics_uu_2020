@@ -8,6 +8,7 @@ private:
     float size;
     float intensity;
     sf::Vector3f position;
+    Color lightColor;
 public:
     Light();
     sf::Vector3f getPosition();

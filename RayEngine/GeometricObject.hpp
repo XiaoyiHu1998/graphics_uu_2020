@@ -5,7 +5,9 @@
 
 class GeometricObject : public Object{
 private:
-
+    sf::Vector3f position;
+    std::vector<sf::Vector3f> geometry;
+    Color color;
 public:
     GeometricObject();
 };
