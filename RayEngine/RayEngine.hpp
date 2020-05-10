@@ -12,7 +12,6 @@ private:
     WorldEnviroment world;
     Renderer renderer;
     InputRecorder inputRecorder;
-    static MathEngine mathEngine;
     bool drawFrame;
 public:
     RayEngine();
