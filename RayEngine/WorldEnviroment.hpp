@@ -1,5 +1,5 @@
-#ifndef WORLD_ENVIROMENT
-#define WORLD_ENVIROMENT
+#ifndef WORLD_ENVIROMENT_HPP
+#define WORLD_ENVIROMENT_HPP
 
 #include "Light.hpp"
 #include "GeometricObject.hpp"
@@ -11,8 +11,8 @@ private:
 public:
     WorldEnviroment();
     void import();
-    std::shared_ptr<std::vector<Light>> getGeometricObjects();
-    std::shared_ptr<std::vector<GeometricObject>> getLightVector();
+    std::shared_ptr<std::vector<Light>> getLightVector();
+    std::shared_ptr<std::vector<GeometricObject>> getGeometricObjects();
 };
 
-#endif //WORLD_ENVIROMENT
+#endif //WORLD_ENVIROMENT_HPP

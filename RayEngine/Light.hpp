@@ -14,5 +14,6 @@ public:
     sf::Vector3f getPosition();
     float getSize();
     float getIntensity();
+    sf::Vector3f getColor();
 };
 #endif //LIGHT_HPP

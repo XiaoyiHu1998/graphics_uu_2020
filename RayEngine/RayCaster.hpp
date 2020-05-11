@@ -1,19 +1,20 @@
-#ifndef RAY_CASTER
-#define RAY_CASTER
+#ifndef RAY_CASTER_HPP
+#define RAY_CASTER_HPP
 
 #include "masterInclude.hpp"
 #include "WorldEnviroment.hpp"
+#include "Ray.hpp"
 
 class RayCaster{
 private:
-    sf::Vector3f originPosition;
-    float screenDistance();
+    sf::Vector3f cameraOrigin;
+    float screenDistance;
     std::shared_ptr<WorldEnviroment> worldPointer;
 public:
-    RayCaster(std::shared_ptr<WorldEnviroment> worldPointer);
+    RayCaster(sf::Vector3f cameraOrigin, float screenDistance, std::shared_ptr<WorldEnviroment> worldPointer);
     void castPrimaryRay();
     void castShadowRay();
-    void castRays();
+    void castRays(float* floatArrayPointer);
 };
 
-#endif //RAY_CASTER
+#endif //RAY_CASTER_HPP

@@ -1,5 +1,5 @@
-#ifndef INPUT_RECORDER
-#define INPUT_RECORDER
+#ifndef INPUT_RECORDER_HPP
+#define INPUT_RECORDER_HPP
 
 
 class InputRecorder{
@@ -10,4 +10,4 @@ public:
     std::vector<string> getCommandVector();
 };
 
-#endif //INPUT_RECORDER
+#endif //INPUT_RECORDER_HPP

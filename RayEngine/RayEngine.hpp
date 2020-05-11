@@ -1,5 +1,5 @@
-#ifndef RAY_ENGINE
-#define RAY_ENGINE
+#ifndef RAY_ENGINE_HPP
+#define RAY_ENGINE_HPP
 
 #include "WorldEnviroment.hpp"
 #include "Renderer.hpp"
@@ -22,4 +22,4 @@ public:
 
 
 
-#endif //RAY_ENGINE
+#endif //RAY_ENGINE_HPP
