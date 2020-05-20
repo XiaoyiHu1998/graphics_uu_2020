@@ -1,7 +1,7 @@
 #ifndef RAY_ENGINE_2D_HPP
 #define RAY_ENGINE_2D_HPP
 
-#include "WorldEnviroment_2D.hpp"
+#include "ObjectStorage_2D.hpp"
 #include "Renderer_2D.hpp"
 
 

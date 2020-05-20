@@ -1,6 +1,6 @@
 #include "RayCaster_2D.hpp"
 
-RayCaster_2D::RayCaster_2D(sf::Vector2f cameraOrigin, float screenDistance, WorldEnviroment_2D* worldPointer):
+RayCaster_2D::RayCaster_2D(sf::Vector2f cameraOrigin, float screenDistance, ObjectStorage_2D* worldPointer):
     cameraOrigin{cameraOrigin},
     screenDistance{screenDistance},
     worldPointer{worldPointer}

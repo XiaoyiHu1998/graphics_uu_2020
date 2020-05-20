@@ -2,7 +2,7 @@
 #define RAY_2D_HPP
 
 #include "masterInclude.hpp"
-#include "WorldEnviroment_2D.hpp"
+#include "ObjectStorage_2D.hpp"
 
 class Ray_2D{
 private:

@@ -7,10 +7,10 @@ class RayCaster_2D{
 private:
     sf::Vector2f cameraOrigin;
     float screenDistance;
-    WorldEnviroment_2D* worldPointer;
+    ObjectStorage_2D* worldPointer;
 public:
     RayCaster_2D(sf::Vector2f cameraOrigin, float screenDistance):cameraOrigin{cameraOrigin}, screenDistance{screenDistance}{}
-    RayCaster_2D(sf::Vector2f cameraOrigin, float screenDistance, WorldEnviroment_2D* worldPointer);
+    RayCaster_2D(sf::Vector2f cameraOrigin, float screenDistance, ObjectStorage_2D* worldPointer);
     void castPrimaryRay();
     void castShadowRay();
     void castRays(float* floatArrayPointer);
