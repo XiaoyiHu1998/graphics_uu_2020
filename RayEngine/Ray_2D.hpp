@@ -10,13 +10,13 @@ private:
     sf::Vector2f normalizedDirection;
     float distanceToLight;
 
-    float calculateLength(sf::Vector2f vector);
+    float calculateLength(const sf::Vector2f & vector);
 public:
     Ray_2D();
-    bool intersects(GeometricObject_2D & object);
-    void setPosition(sf::Vector2i position);
-    void setNormalizedDirection(sf::Vector2f lightPosition);
-    void setDistanceToLight(sf::Vector2f lightPosition);
+    const bool intersects(const GeometricObject_2D & object);
+    const void setPosition(const sf::Vector2i & position);
+    const void setNormalizedDirection(const sf::Vector2f & lightPosition);
+    const void setDistanceToLight(const sf::Vector2f & lightPosition);
     float getDistanceToLight();
 };
 

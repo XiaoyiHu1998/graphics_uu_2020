@@ -1,25 +1,30 @@
 #include "Ray_2D.hpp"
 #include "math.h"
 
-Ray_2D::Ray_2D(){}
+Ray_2D::Ray_2D():
+    originPosition{sf::Vector2f()},
+    normalizedDirection(sf::Vector2f()),
+    distanceToLight{0}
+{}
 
-bool Ray_2D::intersects(GeometricObject_2D & object){
+const bool Ray_2D::intersects(const GeometricObject_2D & object){
     return false;
 }
 
-void Ray_2D::setPosition(sf::Vector2i position){
+const void Ray_2D::setPosition(const sf::Vector2i & position){
     originPosition = sf::Vector2f(position.x, position.y);
 }
 
-void Ray_2D::setNormalizedDirection(sf::Vector2f lightPosition){
+const void Ray_2D::setNormalizedDirection(const sf::Vector2f & lightPosition){
     sf::Vector2f direction = lightPosition - originPosition;
-    // float directionLength = mathEngine::calculateLength(direction);
-    // normalizedDirection = sf::Vector2f(direction.x / directionLength, direction.y / directionLength);
+    float directionLength = calculateLength(direction);
+    normalizedDirection = sf::Vector2f(direction.x / directionLength, direction.y / directionLength);
 }
 
-void Ray_2D::setDistanceToLight(sf::Vector2f lightPosition){
+const void Ray_2D::setDistanceToLight(const sf::Vector2f & lightPosition){
     sf::Vector2f originToLightVector = lightPosition - originPosition;
-    // distanceToLight = mathEngine::calculateLength(originToLightVector);
+    std::cout << originToLightVector.x << "," << originToLightVector.y << std::endl;
+    distanceToLight = calculateLength(originToLightVector);
 }
 
 float Ray_2D::getDistanceToLight(){
@@ -27,6 +32,6 @@ float Ray_2D::getDistanceToLight(){
 }
 
 
-float Ray_2D::calculateLength(sf::Vector2f vector){
+float Ray_2D::calculateLength(const sf::Vector2f & vector){
     return sqrt(vector.x * vector.x + vector.y * vector.y);
 }

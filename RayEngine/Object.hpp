@@ -8,7 +8,7 @@ class Object{
 private:
     string objectType;
 public:
-    Object(){};
+    Object();
     string getObjectType();
 };
 

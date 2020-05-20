@@ -11,15 +11,16 @@
                 "Renderer_2D.cpp",
                 "ObjectStorage_2D.cpp",
                 "Ray_2D.cpp",
+                "Light_2D.cpp",
                 "-lsfml-graphics",
                 "-lsfml-window",
                 "-lsfml-system",
                 "-lsfml-audio",
-                "-g",
+                "-g3",
                 "-o",
                 "main.exe",
-                "-std=c++17",
-                "-O3"
+                "-std=c++17"
+                // "-Og"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/RayEngine"

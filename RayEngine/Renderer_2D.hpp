@@ -6,18 +6,20 @@
 class Renderer_2D{
 private:
     RayCaster_2D rayCaster;
+    ObjectStorage_2D objectStorage;
 
     sf::RenderWindow window;
     sf::Image renderFrameBuffer;
     sf::Texture texture;
     sf::Sprite sprite;
-    float colorBuffer[WINDOW_PIXEL_COUNT * 4];
-    sf::Color fillRenderBuffer(int pixelIndex);
+    std::unique_ptr<float[]> colorBuffer;
+    sf::Color fillRenderBuffer(int x, int y);
 public:
-    Renderer_2D(std::shared_ptr<std::vector<Light_2D>> lightVector, std::shared_ptr<std::vector<GeometricObject_2D>> geometricObjects);
+    Renderer_2D();
     void init();
     void renderFrame();
     void drawFrame();
+    sf::RenderWindow* getWindowPointer();
 };
 
 

@@ -7,11 +7,9 @@
 
 class RayCaster_2D{
 private:
-    std::shared_ptr<std::vector<Light_2D>> lightVector;
-    std::shared_ptr<std::vector<GeometricObject_2D>> geometricObjects;
 public:
-    RayCaster_2D(std::shared_ptr<std::vector<Light_2D>> lightVector, std::shared_ptr<std::vector<GeometricObject_2D>> geometricObjects);
-    void castRays(float (&colorBuffer)[WINDOW_PIXEL_COUNT * 4]);
+    RayCaster_2D();
+    std::unique_ptr<float[]> castRays(std::vector<Light_2D> lightVector, std::vector<GeometricObject_2D> geometricObjects);
     float lightAttenuation(float distance);
 };
 

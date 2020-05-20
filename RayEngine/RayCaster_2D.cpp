@@ -1,41 +1,45 @@
 #include "RayCaster_2D.hpp"
 
-RayCaster_2D::RayCaster_2D(std::shared_ptr<std::vector<Light_2D>> lightVector, std::shared_ptr<std::vector<GeometricObject_2D>> geometricObjects)
+RayCaster_2D::RayCaster_2D()
 {}
 
-void RayCaster_2D::castRays(float (&colorBuffer)[WINDOW_PIXEL_COUNT * 4]){
+std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> lightVector, std::vector<GeometricObject_2D> geometricObjects){
 
+    std::unique_ptr<float[]> heapBuffer = std::make_unique<float[]>(COLOR_BUFFER_SIZE);
     bool occluded = false;
-    for(int y = 0; y < WINDOW_RESOLUTION_Y; y++){
-        for(int x = 0; x < WINDOW_RESOLUTION_X; x++){
-            float color[4] = {0, 0, 0, 1};
+    Ray_2D ray = Ray_2D();
+    for(uint y = 0; y < WINDOW_RESOLUTION_Y; y++){
+        for(uint x = 0; x < WINDOW_RESOLUTION_X; x++){
 
-            for(Light_2D & light : *lightVector.get()){
-                Ray_2D ray = Ray_2D();
-
+            for(Light_2D & light : lightVector){
+                sf::Vector2f lightPosition = light.getPosition();
                 ray.setPosition(sf::Vector2i(x,y));
-                ray.setNormalizedDirection(light.getPosition());
-                ray.setDistanceToLight(light.getPosition());
+                ray.setNormalizedDirection(lightPosition);
+                ray.setDistanceToLight(lightPosition);
 
-                for(GeometricObject_2D & object : *geometricObjects.get()){
+                for(GeometricObject_2D & object : geometricObjects){
                     occluded = ray.intersects(object);
                 }
 
                 if(!occluded){
-                    float lightColor[3] = {light.getColor().x, light.getColor().y, light.getColor().z};
-                    float attenuationValue = lightAttenuation(ray.getDistanceToLight());
-                    for(int i = 0; i < 3; i++){
-                        color[i] = lightColor[i] * attenuationValue;
-                    }
-                }
-            }
+                    sf::Vector3f lightColorVec3 = light.getColor();
+                    uint pixelIndex = (x + y * WINDOW_RESOLUTION_X) * 4;
 
-            int pixelIndex = x + y *WINDOW_RESOLUTION_X;
-            for(int i = 0; i < 4; i++){
-                colorBuffer[pixelIndex + i] = color[i];
+                    float attenuationValue = lightAttenuation(ray.getDistanceToLight());
+                    heapBuffer.get()[pixelIndex + 0] = lightColorVec3.x * attenuationValue;
+                    heapBuffer.get()[pixelIndex + 1] = lightColorVec3.y * attenuationValue;
+                    heapBuffer.get()[pixelIndex + 2] = lightColorVec3.z * attenuationValue;
+                    heapBuffer.get()[pixelIndex + 3] = 1;
+                }
             }
         }
     }
+    
+    for(int i = 0; i < COLOR_BUFFER_SIZE; i++){
+        std::cout << "index: " << i << " - float: " << heapBuffer.get()[i] << std::endl;
+    } 
+
+    return heapBuffer;
 }
 
 float RayCaster_2D::lightAttenuation(float distance){

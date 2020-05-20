@@ -7,7 +7,7 @@
 
 class RayEngine_2D{
 private:
-    ObjectStorage_2D world;
+    // ObjectStorage_2D world;
     Renderer_2D renderer;
     bool drawFrame;
 public:
@@ -15,6 +15,7 @@ public:
     void init();
     void handleInput();
     void renderLoop();
+    sf::RenderWindow* getWindowPointer();
 };
 
 

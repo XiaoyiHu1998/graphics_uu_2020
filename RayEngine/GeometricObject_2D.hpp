@@ -3,7 +3,7 @@
 
 #include "Object.hpp"
 
-class GeometricObject_2D : public Object{
+class GeometricObject_2D{
 private:
     sf::Vector2f position;
     sf::Vector3f color;
