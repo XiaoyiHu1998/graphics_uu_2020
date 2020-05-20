@@ -9,7 +9,7 @@ class RayEngine_2D{
 private:
     ObjectStorage_2D world;
     Renderer_2D renderer;
-    bool drawFrame;
+    // bool drawFrame;
 public:
     RayEngine_2D();
     void init();

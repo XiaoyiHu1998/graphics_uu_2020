@@ -12,17 +12,13 @@ private:
     sf::Texture texture;
     sf::Sprite sprite;
 
-    uint8_t drawColorArray_int[WINDOW_PIXEL_COUNT * 3];
-    float drawColorArray_float[WINDOW_PIXEL_COUNT * 3];
-    sf::Vector3f renderColorArray_HDR[WINDOW_PIXEL_COUNT];
-    sf::Vector3i renderColorArray_SDR[WINDOW_PIXEL_COUNT];
+    float colorBuffer[WINDOW_PIXEL_COUNT * 4];
 public:
-    Renderer_2D():rayCaster(sf::Vector2f(0,0),0){}
-    Renderer_2D(ObjectStorage_2D* worldPointer);
+    Renderer_2D(std::shared_ptr<std::vector<Light_2D>> lightVector, std::shared_ptr<std::vector<GeometricObject_2D>> geometricObjects);
     void init();
     void renderFrame();
     void drawFrame();
-    sf::Color sfColorFromFloatBuffer(uint x, uint y, const float* arrayPointer);
+    sf::Color sfColorFromFloatBuffer(int pixelIndex);
 };
 
 

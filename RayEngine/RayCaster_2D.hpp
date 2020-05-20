@@ -2,18 +2,16 @@
 #define RAY_CASTER_2D_HPP
 
 #include "Ray_2D.hpp"
+#include "GeometricObject_2D.hpp"
+#include "Light_2D.hpp"
 
 class RayCaster_2D{
 private:
-    sf::Vector2f cameraOrigin;
-    float screenDistance;
-    ObjectStorage_2D* worldPointer;
+    std::shared_ptr<std::vector<Light_2D>> lightVector;
+    std::shared_ptr<std::vector<GeometricObject_2D>> geometricObjects;
 public:
-    RayCaster_2D(sf::Vector2f cameraOrigin, float screenDistance):cameraOrigin{cameraOrigin}, screenDistance{screenDistance}{}
-    RayCaster_2D(sf::Vector2f cameraOrigin, float screenDistance, ObjectStorage_2D* worldPointer);
-    void castPrimaryRay();
-    void castShadowRay();
-    void castRays(float* floatArrayPointer);
+    RayCaster_2D(std::shared_ptr<std::vector<Light_2D>> lightVector, std::shared_ptr<std::vector<GeometricObject_2D>> geometricObjects);
+    void castRays(float (&colorBuffer)[WINDOW_PIXEL_COUNT * 4]);
     float lightAttenuation(float distance);
 };
 

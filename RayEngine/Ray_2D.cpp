@@ -3,7 +3,7 @@
 
 Ray_2D::Ray_2D(){}
 
-bool Ray_2D::intersects(GeometricObject_2D* object){
+bool Ray_2D::intersects(GeometricObject_2D & object){
     return false;
 }
 
