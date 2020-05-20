@@ -6,7 +6,6 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "MathEngine.hpp"
 
 using std::string;
 

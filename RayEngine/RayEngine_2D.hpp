@@ -1,21 +1,20 @@
 #ifndef RAY_ENGINE_2D_HPP
 #define RAY_ENGINE_2D_HPP
 
-#include "2D/WorldEnviroment_2D.hpp"
-#include "2D/Renderer_2D.hpp"
+#include "WorldEnviroment_2D.hpp"
+#include "Renderer_2D.hpp"
 #include "InputRecorder.hpp"
-#include "MathEngine.hpp"
 
 
-class RayEngine{
+class RayEngine_2D{
 private:
     WorldEnviroment_2D world;
     Renderer_2D renderer;
     InputRecorder inputRecorder;
     bool drawFrame;
 public:
-    RayEngine();
-    void initiate();
+    RayEngine_2D();
+    void init();
     void handleInput();
     void renderLoop();
 };

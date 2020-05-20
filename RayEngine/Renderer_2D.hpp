@@ -5,17 +5,20 @@
 
 class Renderer_2D{
 private:
-    sf::RenderWindow window;
     RayCaster_2D rayCaster;
-    sf::Image RenderFrameBuffer;
+
+    sf::RenderWindow window;
+    sf::Image renderFrameBuffer;
     sf::Texture texture;
     sf::Sprite sprite;
+
     uint8_t drawColorArray_int[WINDOW_PIXEL_COUNT * 3];
     float drawColorArray_float[WINDOW_PIXEL_COUNT * 3];
     sf::Vector3f renderColorArray_HDR[WINDOW_PIXEL_COUNT];
     sf::Vector3i renderColorArray_SDR[WINDOW_PIXEL_COUNT];
 public:
-    Renderer_2D(std::shared_ptr<WorldEnviroment_2D> worldPointer);
+    Renderer_2D():rayCaster(sf::Vector2f(0,0),0){}
+    Renderer_2D(WorldEnviroment_2D* worldPointer);
     void init();
     void renderFrame();
     void drawFrame();

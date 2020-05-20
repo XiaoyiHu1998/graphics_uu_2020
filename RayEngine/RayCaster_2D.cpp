@@ -1,6 +1,6 @@
-#include "2D/RayCaster_2D.hpp"
+#include "RayCaster_2D.hpp"
 
-RayCaster_2D::RayCaster_2D(sf::Vector2f cameraOrigin, float screenDistance, std::shared_ptr<WorldEnviroment_2D> worldPointer):
+RayCaster_2D::RayCaster_2D(sf::Vector2f cameraOrigin, float screenDistance, WorldEnviroment_2D* worldPointer):
     cameraOrigin{cameraOrigin},
     screenDistance{screenDistance},
     worldPointer{worldPointer}
@@ -20,11 +20,11 @@ void RayCaster_2D::castRays(float* floatArrayPointer){
 
     for(uint y = 0; y < WINDOW_RESOLUTION_Y; y++){
         for(uint x = 0; x < WINDOW_RESOLUTION_X; x++){
-            sf::Vector2f pixelColor = sf::Vector2f(0,0,0);
+            sf::Vector3f pixelColor = sf::Vector3f(0,0,0);
             for(Light_2D & light : *lightArray){
                 Ray_2D ray = Ray_2D();
-                ray.setPosition(sf::Vector2i(x,y,0));
-                ray.setDirection(light.getPosition());
+                ray.setPosition(sf::Vector2i(x,y));
+                ray.setNormalizedDirection(light.getPosition());
                 ray.setDistanceToLight(light.getPosition());
 
                 bool occluded = false;
@@ -36,7 +36,7 @@ void RayCaster_2D::castRays(float* floatArrayPointer){
                 }
 
                 if(!occluded){
-                    pixelColor += light.getColor() * mathEngine::lightAttenuation(ray.getDistanceToLight());
+                    pixelColor += light.getColor() * lightAttenuation(ray.getDistanceToLight());
                 }
                 
                 *floatArrayPointer = pixelColor.x;
@@ -48,4 +48,9 @@ void RayCaster_2D::castRays(float* floatArrayPointer){
             }
         }
     }
+}
+
+
+float RayCaster_2D::lightAttenuation(float distance){
+    return 0;
 }

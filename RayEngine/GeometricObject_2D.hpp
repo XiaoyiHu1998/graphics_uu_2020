@@ -7,9 +7,9 @@ class GeometricObject_2D : public Object{
 private:
     sf::Vector2f position;
     std::vector<sf::Vector2f> geometry;
-    Color color;
+    sf::Vector3f color;
 public:
-    GeometricObject_2D();
+    GeometricObject_2D(){};
 };
 
 

@@ -1,0 +1,31 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "compile RayEngine",
+            "command": "g++",
+            "args": [
+                "main.cpp",
+                "RayEngine_2D.cpp",
+                "InputRecorder.cpp",
+                "RayCaster_2D.cpp",
+                "Renderer_2D.cpp",
+                "WorldEnviroment_2D.cpp",
+                "Ray_2D.cpp",
+                "-lsfml-graphics",
+                "-lsfml-window",
+                "-lsfml-system",
+                "-lsfml-audio",
+                "-g",
+                "-o",
+                "main.exe",
+                "-std=c++17",
+                "-O3"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/RayEngine"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}

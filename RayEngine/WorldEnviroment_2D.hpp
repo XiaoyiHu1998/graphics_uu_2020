@@ -1,8 +1,8 @@
 #ifndef WORLD_ENVIROMENT_2D_HPP
 #define WORLD_ENVIROMENT_2D_HPP
 
-#include "2D/Light_2D.hpp"
-#include "2D/GeometricObject_2D.hpp"
+#include "Light_2D.hpp"
+#include "GeometricObject_2D.hpp"
 
 class WorldEnviroment_2D{
 private:

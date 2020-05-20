@@ -8,12 +8,12 @@ private:
     float size;
     float intensity;
     sf::Vector2f position;
-    Color lightColor;
+    sf::Vector3f lightColor;
 public:
-    Light_2D();
-    sf::Vector2f getPosition();
+    Light_2D(){};
+    sf::Vector2f getPosition(){return position;};
     float getSize();
     float getIntensity();
-    sf::Vector2f getColor();
+    sf::Vector3f getColor(){return lightColor;};
 };
 #endif //LIGHT_2D_HPP
