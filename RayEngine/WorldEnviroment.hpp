@@ -10,6 +10,7 @@ private:
     std::vector<GeometricObject> geometricObjects;
 public:
     WorldEnviroment();
+    void init();
     void import();
     std::shared_ptr<std::vector<Light>> getLightVector();
     std::shared_ptr<std::vector<GeometricObject>> getGeometricObjects();

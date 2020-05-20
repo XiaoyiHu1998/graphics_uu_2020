@@ -15,7 +15,7 @@ private:
     sf::Vector3f renderColorArray_HDR[WINDOW_PIXEL_COUNT];
     sf::Vector3i renderColorArray_SDR[WINDOW_PIXEL_COUNT];
 public:
-    Renderer();
+    Renderer(std::shared_ptr<WorldEnviroment> worldPointer);
     void init();
     void renderFrame();
     void drawFrame();

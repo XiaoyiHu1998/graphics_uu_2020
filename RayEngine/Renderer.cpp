@@ -1,8 +1,8 @@
 #include "Renderer.hpp"
 
-Renderer::Renderer():
+Renderer::Renderer(std::shared_ptr<WorldEnviroment> worldPointer):
     window{sf::RenderWindow(sf::VideoMode(WINDOW_RESOLUTION_X, WINDOW_RESOLUTION_Y), "RayEngine")},
-    rayCaster{RayCaster()}
+    rayCaster{RayCaster(sf::Vector3f(0,0,0), 2, worldPointer)}
     {}
 
 void Renderer::init(){
