@@ -39,5 +39,5 @@ void RayCaster_2D::castRays(float (&colorBuffer)[WINDOW_PIXEL_COUNT * 4]){
 }
 
 float RayCaster_2D::lightAttenuation(float distance){
-    return 1.0f; 
+    return 1 / (distance * distance); 
 }

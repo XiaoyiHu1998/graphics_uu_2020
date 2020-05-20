@@ -5,7 +5,7 @@ int main(){
     std::cout << "running" << std::endl;
     RayEngine_2D rayEngine = RayEngine_2D();
     while(1){
-        // rayEngine.renderLoop();
+        rayEngine.renderLoop();
         std::cout << "iteration" << std::endl;
     }
 }

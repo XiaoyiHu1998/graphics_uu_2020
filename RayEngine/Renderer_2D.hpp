@@ -11,14 +11,13 @@ private:
     sf::Image renderFrameBuffer;
     sf::Texture texture;
     sf::Sprite sprite;
-
     float colorBuffer[WINDOW_PIXEL_COUNT * 4];
+    sf::Color fillRenderBuffer(int pixelIndex);
 public:
     Renderer_2D(std::shared_ptr<std::vector<Light_2D>> lightVector, std::shared_ptr<std::vector<GeometricObject_2D>> geometricObjects);
     void init();
     void renderFrame();
     void drawFrame();
-    sf::Color sfColorFromFloatBuffer(int pixelIndex);
 };
 
 

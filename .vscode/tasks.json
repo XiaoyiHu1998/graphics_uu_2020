@@ -7,10 +7,9 @@
             "args": [
                 "main.cpp",
                 "RayEngine_2D.cpp",
-                "InputRecorder.cpp",
                 "RayCaster_2D.cpp",
                 "Renderer_2D.cpp",
-                "WorldEnviroment_2D.cpp",
+                "ObjectStorage_2D.cpp",
                 "Ray_2D.cpp",
                 "-lsfml-graphics",
                 "-lsfml-window",
