@@ -13,7 +13,7 @@ private:
     sf::Texture texture;
     sf::Sprite sprite;
     std::unique_ptr<float[]> colorBuffer;
-    sf::Color fillRenderBuffer(int x, int y);
+    sf::Color getRenderBufferColor(int x, int y);
 public:
     Renderer_2D();
     void init();

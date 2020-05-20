@@ -23,7 +23,6 @@ const void Ray_2D::setNormalizedDirection(const sf::Vector2f & lightPosition){
 
 const void Ray_2D::setDistanceToLight(const sf::Vector2f & lightPosition){
     sf::Vector2f originToLightVector = lightPosition - originPosition;
-    std::cout << originToLightVector.x << "," << originToLightVector.y << std::endl;
     distanceToLight = calculateLength(originToLightVector);
 }
 

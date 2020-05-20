@@ -19,15 +19,17 @@ void Renderer_2D::init(){
 void Renderer_2D::renderFrame(){
 
     colorBuffer = rayCaster.castRays(objectStorage.getLightVector(), objectStorage.getGeometricObjects());
+    
     for(uint y = 0; y < WINDOW_RESOLUTION_Y; y++){
         for(uint x = 0; x < WINDOW_RESOLUTION_X; x++){
-            renderFrameBuffer.setPixel(x, y, fillRenderBuffer(x,y));
+            int currentCoord = x + y * WINDOW_RESOLUTION_X;
+            sf::Color testColor = sf::Color(currentCoord % 255, currentCoord % 128, currentCoord & 64);
+            renderFrameBuffer.setPixel(x, y, getRenderBufferColor(x, y));
         }
     }
 }
 
 void Renderer_2D::drawFrame(){
-    std::cout << "draw" << std::endl;
     window.clear(sf::Color::Black);
     texture.loadFromImage(renderFrameBuffer);
     sprite.setTexture(texture);
@@ -36,10 +38,15 @@ void Renderer_2D::drawFrame(){
     window.display();
 }
 
-sf::Color Renderer_2D::fillRenderBuffer(int x, int y){
+sf::Color Renderer_2D::getRenderBufferColor(int x, int y){
     int index = (x + y * WINDOW_RESOLUTION_X) * 4;
-    // return sf::Color(1,1,1);
-    return sf::Color(static_cast<sf::Uint8>(colorBuffer[index] / 255), static_cast<sf::Uint8>(colorBuffer[index+1] / 255), static_cast<sf::Uint8>(colorBuffer[index+2] / 255), static_cast<sf::Uint8>(colorBuffer[index+3] / 255));
+
+    sf::Uint8 r = static_cast<sf::Uint8>(colorBuffer[index + 0] * 255.0f);
+    sf::Uint8 g = static_cast<sf::Uint8>(colorBuffer[index + 1] * 255.0f);
+    sf::Uint8 b = static_cast<sf::Uint8>(colorBuffer[index + 2] * 255.0f);
+    sf::Uint8 a = static_cast<sf::Uint8>(colorBuffer[index + 3] * 255.0f);
+
+    return sf::Color(r,g,b,a);
 }
 
 sf::RenderWindow* Renderer_2D::getWindowPointer(){
