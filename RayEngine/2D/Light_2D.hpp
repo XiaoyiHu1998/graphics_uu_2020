@@ -7,13 +7,13 @@ class Light_2D : public Object{
 private:
     float size;
     float intensity;
-    sf::Vector3f position;
+    sf::Vector2f position;
     Color lightColor;
 public:
     Light_2D();
-    sf::Vector3f getPosition();
+    sf::Vector2f getPosition();
     float getSize();
     float getIntensity();
-    sf::Vector3f getColor();
+    sf::Vector2f getColor();
 };
 #endif //LIGHT_2D_HPP

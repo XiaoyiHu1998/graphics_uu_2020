@@ -2,7 +2,7 @@
 
 Renderer_2D::Renderer_2D(std::shared_ptr<WorldEnviroment_2D> worldPointer):
     window{sf::RenderWindow(sf::VideoMode(WINDOW_RESOLUTION_X, WINDOW_RESOLUTION_Y), "RayEngine")},
-    rayCaster{RayCaster_2D(sf::Vector3f(0,0,0), 2, worldPointer)}
+    rayCaster{RayCaster_2D(sf::Vector2f(0,0), 2, worldPointer)}
     {}
 
 void Renderer_2D::init(){

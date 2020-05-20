@@ -5,11 +5,11 @@
 
 class RayCaster_2D{
 private:
-    sf::Vector3f cameraOrigin;
+    sf::Vector2f cameraOrigin;
     float screenDistance;
     std::shared_ptr<WorldEnviroment_2D> worldPointer;
 public:
-    RayCaster_2D(sf::Vector3f cameraOrigin, float screenDistance, std::shared_ptr<WorldEnviroment_2D> worldPointer);
+    RayCaster_2D(sf::Vector2f cameraOrigin, float screenDistance, std::shared_ptr<WorldEnviroment_2D> worldPointer);
     void castPrimaryRay();
     void castShadowRay();
     void castRays(float* floatArrayPointer);
