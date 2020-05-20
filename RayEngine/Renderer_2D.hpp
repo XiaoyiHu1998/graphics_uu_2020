@@ -18,7 +18,7 @@ private:
     sf::Vector3i renderColorArray_SDR[WINDOW_PIXEL_COUNT];
 public:
     Renderer_2D():rayCaster(sf::Vector2f(0,0),0){}
-    Renderer_2D(WorldEnviroment_2D* worldPointer);
+    Renderer_2D(ObjectStorage_2D* worldPointer);
     void init();
     void renderFrame();
     void drawFrame();

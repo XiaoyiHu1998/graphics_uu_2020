@@ -1,9 +1,8 @@
 #include "RayEngine_2D.hpp"
 
 RayEngine_2D::RayEngine_2D():
-    world{WorldEnviroment_2D()},
+    world{ObjectStorage_2D()},
     renderer{Renderer_2D()},
-    inputRecorder{InputRecorder()},
     drawFrame{true}
 {}
 
