@@ -1,5 +1,5 @@
-#ifndef RENDERER_HPP
-#define RENDERER_HPP
+#ifndef RENDERER_2D_HPP
+#define RENDERER_2D_HPP
 
 #include "RayCaster_2D.hpp"
 
@@ -23,4 +23,4 @@ public:
 };
 
 
-#endif //RENDERER_HPP
+#endif //RENDERER_2D_HPP

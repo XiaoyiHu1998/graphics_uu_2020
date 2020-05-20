@@ -1,5 +1,5 @@
-#ifndef RAY_HPP
-#define RAY_HPP
+#ifndef RAY_2D_HPP
+#define RAY_2D_HPP
 
 #include "masterInclude.hpp"
 #include "2D/WorldEnviroment_2D.hpp"
@@ -18,4 +18,4 @@ public:
     float getDistanceToLight();
 };
 
-#endif //RAY_HPP
+#endif //RAY_2D_HPP

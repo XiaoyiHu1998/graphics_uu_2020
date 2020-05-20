@@ -1,5 +1,5 @@
-#ifndef RAY_CASTER_HPP
-#define RAY_CASTER_HPP
+#ifndef RAY_CASTER_2D_HPP
+#define RAY_CASTER_2D_HPP
 
 #include "2D/Ray_2D.hpp"
 
@@ -15,4 +15,4 @@ public:
     void castRays(float* floatArrayPointer);
 };
 
-#endif //RAY_CASTER_HPP
+#endif //RAY_CASTER_2D_HPP

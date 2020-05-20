@@ -13,4 +13,4 @@ public:
 };
 
 
-#endif //GEOMETRIC_OBJECT_HPP
+#endif //GEOMETRIC_OBJECT_2D_HPP

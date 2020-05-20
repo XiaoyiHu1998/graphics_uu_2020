@@ -16,4 +16,4 @@ public:
     std::shared_ptr<std::vector<GeometricObject_2D>> getGeometricObjects();
 };
 
-#endif //WORLD_ENVIROMENT_HPP
+#endif //WORLD_ENVIROMENT_2D_HPP

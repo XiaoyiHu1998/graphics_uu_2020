@@ -16,4 +16,4 @@ public:
     float getIntensity();
     sf::Vector3f getColor();
 };
-#endif //LIGHT_HPP
+#endif //LIGHT_2D_HPP
