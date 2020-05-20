@@ -22,7 +22,8 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> lightVecto
                 }
 
                 if(!occluded){
-                    sf::Vector3f lightColorVec3 = light.getColor();
+                    sf::Vector3f lightColorVec3 = sf::Vector3f(0,0,0);
+                    lightColorVec3 = light.getColor();
                     uint pixelIndex = (x + y * WINDOW_RESOLUTION_X) * 4;
 
                     float attenuationValue = lightAttenuation(ray.getDistanceToLight());

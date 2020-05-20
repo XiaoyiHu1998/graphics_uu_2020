@@ -1,6 +1,6 @@
 #include "Light_2D.hpp"
 
-Light_2D::Light_2D(const sf::Vector2f & position, const sf::Vector3f & color):
+Light_2D::Light_2D(const sf::Vector2f & position, const sf::Vector3f & lightColor):
     position{position},
     lightColor{lightColor}
     {};
