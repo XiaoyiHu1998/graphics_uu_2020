@@ -22,5 +22,5 @@ void RayEngine_2D::renderLoop(){
 }
 
 sf::RenderWindow* RayEngine_2D::getWindowPointer(){
-    renderer.getWindowPointer();
+    return renderer.getWindowPointer();
 }

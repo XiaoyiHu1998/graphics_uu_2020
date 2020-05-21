@@ -9,7 +9,7 @@ class RayCaster_2D{
 private:
 public:
     RayCaster_2D();
-    std::unique_ptr<float[]> castRays(std::vector<Light_2D> lightVector, std::vector<GeometricObject_2D> geometricObjects);
+    std::unique_ptr<float[]> castRays(std::vector<Light_2D> & lightVector, std::vector<GeometricObject_2D> & geometricObjects);
     float lightAttenuation(float distance);
 };
 

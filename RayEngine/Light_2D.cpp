@@ -18,10 +18,35 @@ const sf::Vector3f Light_2D::getColor(){
 
 void Light_2D::updatePosition(){
     
-    if(position.x < WINDOW_RESOLUTION_X / 5){
-        position.x += 200;
+    if(position.x < 100){
+        position.x = 600;
     }
     else{
-        position.x -= 5;
+        position.x -= 1;
+    }
+
+}
+
+void Light_2D::updateColor(){
+    if(lightColor.z > 1){
+        lightColor.x = 0;
+    }
+    else{
+        lightColor.x += 0.1;
+    }
+
+    if(lightColor.y > 1){
+        lightColor.y = 0;
+    }
+    else{
+        lightColor.y += 0.2;
+    }
+
+
+    if(lightColor.z > 1){
+        lightColor.z = 0;
+    }
+    else{
+        lightColor.z += 0.05;
     }
 }

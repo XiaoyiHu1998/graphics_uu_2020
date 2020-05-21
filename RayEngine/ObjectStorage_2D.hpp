@@ -12,8 +12,8 @@ public:
     ObjectStorage_2D();
     void init();
     void import();
-    std::vector<Light_2D> getLightVector();
-    std::vector<GeometricObject_2D> getGeometricObjects();
+    std::vector<Light_2D>& getLightVector();
+    std::vector<GeometricObject_2D>& getGeometricObjects();
 };
 
 #endif //OBJECT_STORAGE_2D_HPP
