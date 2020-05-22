@@ -5,14 +5,14 @@
 
 class Object_2D{
 protected:
-    sf::Vector2f position;
+    sf::Vector2i position;
 public:
     Object_2D(const sf::Vector2f & position):
-        position{position}
+        position{sf::Vector2i(position.x, position.y)}
     {}
     
     virtual float getRadius(){return 0;}
-    virtual sf::Vector2f getPosition(){return sf::Vector2f();};
+    virtual sf::Vector2i getPosition(){return position;};
 };
 
 

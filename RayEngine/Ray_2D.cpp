@@ -7,17 +7,22 @@ Ray_2D::Ray_2D():
     distanceToLight{0}
 {}
 
-bool Ray_2D::intersects(Object_2D & object){
-    int s = originPosition.x - object.getPosition().x;
-    int t = originPosition.y - object.getPosition().y;
-    int circleRadius = object.getRadius();
+bool Ray_2D::intersects(std::shared_ptr<Circle_2D> object){
+    int s = originPosition.x - object->getPosition().x;
+    int t = originPosition.y - object->getPosition().y;
+    int circleRadius = object->getRadius();
 
-    int A = normalizedDirection.x * normalizedDirection.x + normalizedDirection.y + normalizedDirection.y;
-    int B = 2 * s * normalizedDirection.x + 2 * t * normalizedDirection.y;
-    int C = s * s + t * t - circleRadius* circleRadius;
+    int A = (normalizedDirection.x * normalizedDirection.x) + (normalizedDirection.y * normalizedDirection.y);
+    int B = (2 * s * normalizedDirection.x) + (2 * t * normalizedDirection.y);
+    int C = (s * s) + (t * t) - (circleRadius * circleRadius);
 
-    int Discriminant = B * B - 4 * A * C;
-    return Discriminant >= 0;
+    int Discriminant = (B * B) - (4 * A * C);
+    if(Discriminant < 0){
+        return false;
+    }
+    else{
+        return ((-1 * B + sqrt(Discriminant)) / 2 * A) <= distanceToLight;
+    }
 }
 
 void Ray_2D::setPosition(const sf::Vector2i & position){

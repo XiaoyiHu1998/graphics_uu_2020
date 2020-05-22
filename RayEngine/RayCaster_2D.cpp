@@ -6,11 +6,12 @@ RayCaster_2D::RayCaster_2D(unsigned int threadCount):
     std::cout << threadCount << std::endl;
 }
 
-std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<Object_2D> & objects){
+std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<std::shared_ptr<Circle_2D>> & objects){
 
     std::unique_ptr<float[]> heapBuffer = std::make_unique<float[]>(COLOR_BUFFER_SIZE);
-    bool occluded = false;
     Ray_2D ray = Ray_2D();
+    bool occluded = false;
+    sf::Vector2f lightPosition;
 
     for(uint y = 0; y < WINDOW_RESOLUTION_Y; y++){
         
@@ -23,14 +24,26 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
             heapBuffer.get()[pixelIndex + 3] = 1;
 
             for(Light_2D & light : lightVector){
-                sf::Vector2f lightPosition = light.getPosition();
+                lightPosition = light.getPosition();
                 
                 ray.setPosition(sf::Vector2i(x,y));
                 ray.setNormalizedDirection(lightPosition);
                 ray.setDistanceToLight(lightPosition);
 
-                for(Object_2D & object : objects){
-                    occluded = ray.intersects(object);
+                for(std::shared_ptr<Circle_2D> object : objects){
+                    occluded = ray.intersects(object); 
+                    // float radius = object->getRadius();
+                    // if(x < object->getPosition().x + radius && x > object->getPosition().x - radius){
+                    //     if(y < object->getPosition().y + radius && y > object->getPosition().y - radius){
+                    //         heapBuffer.get()[pixelIndex + 0] = 1.0f;
+                    //         heapBuffer.get()[pixelIndex + 1] = 1.0f;
+                    //         heapBuffer.get()[pixelIndex + 2] = 1.0f;
+                    //         heapBuffer.get()[pixelIndex + 3] = 1.0f;
+                    //     }
+                    // }
+                    if(occluded){
+                        break;
+                    }
                 }
 
                 if(!occluded){
@@ -58,5 +71,5 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
 }
 
 float RayCaster_2D::lightAttenuation(float distance){
-    return 1 / (distance * distance) ; 
+    return 1 / (distance) * 2; 
 }

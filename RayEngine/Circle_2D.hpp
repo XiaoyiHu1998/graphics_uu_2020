@@ -23,7 +23,7 @@ public:
         return radius;
     }
 
-    sf::Vector2f getPosition() override {
+    sf::Vector2i getPosition() override {
         return position;
     }
 };

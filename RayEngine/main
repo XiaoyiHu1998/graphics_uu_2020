@@ -59511,13 +59511,13 @@ public:
 class WorldEnviroment_2D{
 private:
     std::vector<Light_2D> lightVector;
-    std::vector<Object_2D> objects;
+    std::vector<Circle_2D> objects;
 public:
     WorldEnviroment_2D();
     void init();
     void import();
     std::shared_ptr<std::vector<Light_2D>> getLightVector();
-    std::shared_ptr<std::vector<Object_2D>> getobjects();
+    std::shared_ptr<std::vector<Circle_2D>> getobjects();
 };
 # 5 "/home/xiaoyi/Desktop/Repositories/graphics_uu_2020/RayEngine/RayEngine_2D.hpp" 2
 # 1 "/home/xiaoyi/Desktop/Repositories/graphics_uu_2020/RayEngine/Renderer_2D.hpp" 1
@@ -59544,7 +59544,7 @@ private:
     float calculateLength(sf::Vector2f vector);
 public:
     Ray_2D();
-    bool intersects(Object_2D* object);
+    bool intersects(std::shared_ptr<Circle_2D> object);
     void setPosition(sf::Vector2i position);
     void setNormalizedDirection(sf::Vector2f lightPosition);
     void setDistanceToLight(sf::Vector2f lightPosition);

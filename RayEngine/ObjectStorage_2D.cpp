@@ -6,7 +6,7 @@ std::vector<Light_2D>& ObjectStorage_2D::getLightVector(){
     return lightVector;
 }
 
-std::vector<Object_2D>& ObjectStorage_2D::getobjects(){
+std::vector<std::shared_ptr<Circle_2D>>& ObjectStorage_2D::getobjects(){
     return objects;
 }
 
@@ -18,7 +18,10 @@ void ObjectStorage_2D::init(){
             Light_2D(sf::Vector2f(600, 350), sf::Vector3f(0.2, 0.5, 0.4), 1)
     };
 
-    objects = std::vector<Object_2D>{
-            Circle_2D(sf::Vector2f(50,50),1)
+    objects = std::vector<std::shared_ptr<Circle_2D>>{
+            std::make_shared<Circle_2D>(sf::Vector2f(350,250), 20),
+            std::make_shared<Circle_2D>(sf::Vector2f(120,340), 20),
+            std::make_shared<Circle_2D>(sf::Vector2f(500,50), 30),
+            std::make_shared<Circle_2D>(sf::Vector2f(150,100), 50),
     };
 }

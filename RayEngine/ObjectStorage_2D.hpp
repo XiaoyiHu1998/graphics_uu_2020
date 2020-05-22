@@ -7,13 +7,13 @@
 class ObjectStorage_2D{
 private:
     std::vector<Light_2D> lightVector;
-    std::vector<Object_2D> objects;
+    std::vector<std::shared_ptr<Circle_2D>> objects;
 public:
     ObjectStorage_2D();
     void init();
     void import();
     std::vector<Light_2D>& getLightVector();
-    std::vector<Object_2D>& getobjects();
+    std::vector<std::shared_ptr<Circle_2D>>& getobjects();
 };
 
 #endif //OBJECT_STORAGE_2D_HPP
