@@ -17,7 +17,7 @@ private:
     unsigned int threadCount;
 
     sf::Color getRenderBufferColor(int x, int y);
-    float getBoundedFloat(float number);
+    float getBoundedfloat(float number);
 public:
     Renderer_2D();
     void init();

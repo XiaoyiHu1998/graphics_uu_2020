@@ -8,27 +8,22 @@ Ray_2D::Ray_2D():
 {}
 
 bool Ray_2D::intersects(std::shared_ptr<Circle_2D> object){
-    // int adjustedOriginX = originPosition.x + normalizedDirection.x * 0.001;
-    // int adjustedOriginY = originPosition.y + normalizedDirection.y * 0.001;
 
-    // int adjustedEndX = object->getPosition().x - normalizedDirection.x * 0.001;
-    // int adjustedEndY = object->getPosition().x - normalizedDirection.y * 0.001;
+    double s = originPosition.x - object->getPosition().x;
+    double t = originPosition.y - object->getPosition().y;
+    double circleRadius = object->getRadius();
 
-    float s = originPosition.x - object->getPosition().x;
-    float t = originPosition.y - object->getPosition().y;
-    float circleRadius = object->getRadius();
+    double A = (normalizedDirection.x * normalizedDirection.x) + (normalizedDirection.y * normalizedDirection.y);
+    double B = (2 * s * normalizedDirection.x) + (2 * t * normalizedDirection.y);
+    double C = (s * s) + (t * t) - (circleRadius * circleRadius);
 
-    float A = (normalizedDirection.x * normalizedDirection.x) + (normalizedDirection.y * normalizedDirection.y);
-    float B = (2 * s * normalizedDirection.x) + (2 * t * normalizedDirection.y);
-    float C = (s * s) + (t * t) - (circleRadius * circleRadius);
-
-    float Discriminant = (B * B) - (4 * A * C);
+    double Discriminant = (B * B) - (4 * A * C);
     if(Discriminant < 0){
         return false;
     }
     else{
         bool firstResult = ((-1 * B + fastSqrt(Discriminant)) / 2 * A) <= distanceToLight;
-        bool secondResult = ((-1 * B - fastSqrt(Discriminant)) / 2 * A) <= distanceToLight;
+        bool secondResult = ((-1 * B - fastSqrt(Discriminant)) / 2 * A) < distanceToLight;
         return firstResult || secondResult;
     }
 }
@@ -51,7 +46,7 @@ float Ray_2D::getDistanceToLight(){
 float Ray_2D::calculateLength(const sf::Vector2f & vector){
     // std::cout << fastSqrt(vector.x * vector.x + vector.y * vector.y) << "," << sqrt(vector.x * vector.x + vector.y * vector.y) << std::endl;
     // return fastSqrt(vector.x * vector.x + vector.y * vector.y);
-    return sqrt(vector.x * vector.x + vector.y * vector.y);
+    return fastSqrt(vector.x * vector.x + vector.y * vector.y);
 }
 
 

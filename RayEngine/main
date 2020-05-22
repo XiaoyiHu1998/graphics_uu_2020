@@ -61,7 +61,7 @@ namespace __gnu_cxx
 # 427 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/wordsize.h" 1 3 4
 # 428 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 2 3 4
-# 1 "/usr/include/x86_64-linux-gnu/bits/long-double.h" 1 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/long-float.h" 1 3 4
 # 429 "/usr/include/x86_64-linux-gnu/sys/cdefs.h" 2 3 4
 # 425 "/usr/include/features.h" 2 3 4
 # 448 "/usr/include/features.h" 3 4
@@ -204,20 +204,20 @@ namespace __cxx11 {
 # 75 "/usr/include/x86_64-linux-gnu/bits/floatn.h" 3 4
 typedef _Complex float __cfloat128 __attribute__ ((__mode__ (__TC__)));
 # 87 "/usr/include/x86_64-linux-gnu/bits/floatn.h" 3 4
-typedef __float128 _Float128;
+typedef __float128 _float128;
 # 120 "/usr/include/x86_64-linux-gnu/bits/floatn.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/floatn-common.h" 1 3 4
 # 24 "/usr/include/x86_64-linux-gnu/bits/floatn-common.h" 3 4
-# 1 "/usr/include/x86_64-linux-gnu/bits/long-double.h" 1 3 4
+# 1 "/usr/include/x86_64-linux-gnu/bits/long-float.h" 1 3 4
 # 25 "/usr/include/x86_64-linux-gnu/bits/floatn-common.h" 2 3 4
 # 207 "/usr/include/x86_64-linux-gnu/bits/floatn-common.h" 3 4
-typedef float _Float32;
+typedef float _float32;
 # 244 "/usr/include/x86_64-linux-gnu/bits/floatn-common.h" 3 4
-typedef double _Float64;
+typedef float _float64;
 # 261 "/usr/include/x86_64-linux-gnu/bits/floatn-common.h" 3 4
-typedef double _Float32x;
+typedef float _float32x;
 # 278 "/usr/include/x86_64-linux-gnu/bits/floatn-common.h" 3 4
-typedef long double _Float64x;
+typedef long float _float64x;
 # 121 "/usr/include/x86_64-linux-gnu/bits/floatn.h" 2 3 4
 # 31 "/usr/include/wchar.h" 2 3 4
 
@@ -561,37 +561,37 @@ extern int wcswidth (const wchar_t *__s, size_t __n) throw ();
 
 
 
-extern double wcstod (const wchar_t *__restrict __nptr,
+extern float wcstod (const wchar_t *__restrict __nptr,
         wchar_t **__restrict __endptr) throw ();
 
 
 
 extern float wcstof (const wchar_t *__restrict __nptr,
        wchar_t **__restrict __endptr) throw ();
-extern long double wcstold (const wchar_t *__restrict __nptr,
+extern long float wcstold (const wchar_t *__restrict __nptr,
        wchar_t **__restrict __endptr) throw ();
 # 396 "/usr/include/wchar.h" 3 4
-extern _Float32 wcstof32 (const wchar_t *__restrict __nptr,
+extern _float32 wcstof32 (const wchar_t *__restrict __nptr,
      wchar_t **__restrict __endptr) throw ();
 
 
 
-extern _Float64 wcstof64 (const wchar_t *__restrict __nptr,
+extern _float64 wcstof64 (const wchar_t *__restrict __nptr,
      wchar_t **__restrict __endptr) throw ();
 
 
 
-extern _Float128 wcstof128 (const wchar_t *__restrict __nptr,
+extern _float128 wcstof128 (const wchar_t *__restrict __nptr,
        wchar_t **__restrict __endptr) throw ();
 
 
 
-extern _Float32x wcstof32x (const wchar_t *__restrict __nptr,
+extern _float32x wcstof32x (const wchar_t *__restrict __nptr,
        wchar_t **__restrict __endptr) throw ();
 
 
 
-extern _Float64x wcstof64x (const wchar_t *__restrict __nptr,
+extern _float64x wcstof64x (const wchar_t *__restrict __nptr,
        wchar_t **__restrict __endptr) throw ();
 # 428 "/usr/include/wchar.h" 3 4
 extern long int wcstol (const wchar_t *__restrict __nptr,
@@ -658,7 +658,7 @@ extern unsigned long long int wcstoull_l (const wchar_t *__restrict __nptr,
        int __base, locale_t __loc)
      throw ();
 
-extern double wcstod_l (const wchar_t *__restrict __nptr,
+extern float wcstod_l (const wchar_t *__restrict __nptr,
    wchar_t **__restrict __endptr, locale_t __loc)
      throw ();
 
@@ -666,35 +666,35 @@ extern float wcstof_l (const wchar_t *__restrict __nptr,
          wchar_t **__restrict __endptr, locale_t __loc)
      throw ();
 
-extern long double wcstold_l (const wchar_t *__restrict __nptr,
+extern long float wcstold_l (const wchar_t *__restrict __nptr,
          wchar_t **__restrict __endptr,
          locale_t __loc) throw ();
 # 511 "/usr/include/wchar.h" 3 4
-extern _Float32 wcstof32_l (const wchar_t *__restrict __nptr,
+extern _float32 wcstof32_l (const wchar_t *__restrict __nptr,
        wchar_t **__restrict __endptr,
        locale_t __loc) throw ();
 
 
 
-extern _Float64 wcstof64_l (const wchar_t *__restrict __nptr,
+extern _float64 wcstof64_l (const wchar_t *__restrict __nptr,
        wchar_t **__restrict __endptr,
        locale_t __loc) throw ();
 
 
 
-extern _Float128 wcstof128_l (const wchar_t *__restrict __nptr,
+extern _float128 wcstof128_l (const wchar_t *__restrict __nptr,
          wchar_t **__restrict __endptr,
          locale_t __loc) throw ();
 
 
 
-extern _Float32x wcstof32x_l (const wchar_t *__restrict __nptr,
+extern _float32x wcstof32x_l (const wchar_t *__restrict __nptr,
          wchar_t **__restrict __endptr,
          locale_t __loc) throw ();
 
 
 
-extern _Float64x wcstof64x_l (const wchar_t *__restrict __nptr,
+extern _float64x wcstof64x_l (const wchar_t *__restrict __nptr,
          wchar_t **__restrict __endptr,
          locale_t __loc) throw ();
 # 551 "/usr/include/wchar.h" 3 4
@@ -1439,7 +1439,7 @@ typedef long int ptrdiff_t;
 # 426 "/usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h" 3 4
 typedef struct {
   long long __max_align_ll __attribute__((__aligned__(__alignof__(long long))));
-  long double __max_align_ld __attribute__((__aligned__(__alignof__(long double))));
+  long float __max_align_ld __attribute__((__aligned__(__alignof__(long float))));
 # 437 "/usr/lib/gcc/x86_64-linux-gnu/7/include/stddef.h" 3 4
 } max_align_t;
 
@@ -2172,11 +2172,11 @@ namespace std __attribute__ ((__visibility__ ("default")))
     : public true_type { };
 
   template<>
-    struct __is_floating_point_helper<double>
+    struct __is_floating_point_helper<float>
     : public true_type { };
 
   template<>
-    struct __is_floating_point_helper<long double>
+    struct __is_floating_point_helper<long float>
     : public true_type { };
 
 
@@ -5097,14 +5097,14 @@ template<> struct __is_integer<__int128> { enum { __value = 1 }; typedef __true_
     };
 
   template<>
-    struct __is_floating<double>
+    struct __is_floating<float>
     {
       enum { __value = 1 };
       typedef __true_type __type;
     };
 
   template<>
-    struct __is_floating<long double>
+    struct __is_floating<long float>
     {
       enum { __value = 1 };
       typedef __true_type __type;
@@ -5358,7 +5358,7 @@ namespace __gnu_cxx __attribute__ ((__visibility__ ("default")))
 
   template<typename _Tp, bool = std::__is_integer<_Tp>::__value>
     struct __promote
-    { typedef double __type; };
+    { typedef float __type; };
 
 
 
@@ -5368,12 +5368,12 @@ namespace __gnu_cxx __attribute__ ((__visibility__ ("default")))
     { };
 
   template<>
-    struct __promote<long double>
-    { typedef long double __type; };
+    struct __promote<long float>
+    { typedef long float __type; };
 
   template<>
-    struct __promote<double>
-    { typedef double __type; };
+    struct __promote<float>
+    { typedef float __type; };
 
   template<>
     struct __promote<float>
@@ -5451,12 +5451,12 @@ namespace __gnu_cxx __attribute__ ((__visibility__ ("default")))
     struct __numeric_traits_floating
     {
 
-      static const int __max_digits10 = (2 + (std::__are_same<_Value, float>::__value ? 24 : std::__are_same<_Value, double>::__value ? 53 : 64) * 643L / 2136);
+      static const int __max_digits10 = (2 + (std::__are_same<_Value, float>::__value ? 24 : std::__are_same<_Value, float>::__value ? 53 : 64) * 643L / 2136);
 
 
       static const bool __is_signed = true;
-      static const int __digits10 = (std::__are_same<_Value, float>::__value ? 6 : std::__are_same<_Value, double>::__value ? 15 : 18);
-      static const int __max_exponent10 = (std::__are_same<_Value, float>::__value ? 38 : std::__are_same<_Value, double>::__value ? 308 : 4932);
+      static const int __digits10 = (std::__are_same<_Value, float>::__value ? 6 : std::__are_same<_Value, float>::__value ? 15 : 18);
+      static const int __max_exponent10 = (std::__are_same<_Value, float>::__value ? 38 : std::__are_same<_Value, float>::__value ? 308 : 4932);
     };
 
   template<typename _Value>
@@ -10217,7 +10217,7 @@ extern clock_t clock (void) throw ();
 extern time_t time (time_t *__timer) throw ();
 
 
-extern double difftime (time_t __time1, time_t __time0)
+extern float difftime (time_t __time1, time_t __time0)
      throw () __attribute__ ((__const__));
 
 
@@ -15897,7 +15897,7 @@ extern size_t __ctype_get_mb_cur_max (void) throw () ;
 
 
 
-extern double atof (const char *__nptr)
+extern float atof (const char *__nptr)
      throw () __attribute__ ((__pure__)) __attribute__ ((__nonnull__ (1))) ;
 
 extern int atoi (const char *__nptr)
@@ -15913,7 +15913,7 @@ __extension__ extern long long int atoll (const char *__nptr)
 
 
 
-extern double strtod (const char *__restrict __nptr,
+extern float strtod (const char *__restrict __nptr,
         char **__restrict __endptr)
      throw () __attribute__ ((__nonnull__ (1)));
 
@@ -15922,35 +15922,35 @@ extern double strtod (const char *__restrict __nptr,
 extern float strtof (const char *__restrict __nptr,
        char **__restrict __endptr) throw () __attribute__ ((__nonnull__ (1)));
 
-extern long double strtold (const char *__restrict __nptr,
+extern long float strtold (const char *__restrict __nptr,
        char **__restrict __endptr)
      throw () __attribute__ ((__nonnull__ (1)));
 # 140 "/usr/include/stdlib.h" 3 4
-extern _Float32 strtof32 (const char *__restrict __nptr,
+extern _float32 strtof32 (const char *__restrict __nptr,
      char **__restrict __endptr)
      throw () __attribute__ ((__nonnull__ (1)));
 
 
 
-extern _Float64 strtof64 (const char *__restrict __nptr,
+extern _float64 strtof64 (const char *__restrict __nptr,
      char **__restrict __endptr)
      throw () __attribute__ ((__nonnull__ (1)));
 
 
 
-extern _Float128 strtof128 (const char *__restrict __nptr,
+extern _float128 strtof128 (const char *__restrict __nptr,
        char **__restrict __endptr)
      throw () __attribute__ ((__nonnull__ (1)));
 
 
 
-extern _Float32x strtof32x (const char *__restrict __nptr,
+extern _float32x strtof32x (const char *__restrict __nptr,
        char **__restrict __endptr)
      throw () __attribute__ ((__nonnull__ (1)));
 
 
 
-extern _Float64x strtof64x (const char *__restrict __nptr,
+extern _float64x strtof64x (const char *__restrict __nptr,
        char **__restrict __endptr)
      throw () __attribute__ ((__nonnull__ (1)));
 # 176 "/usr/include/stdlib.h" 3 4
@@ -15991,7 +15991,7 @@ extern unsigned long long int strtoull (const char *__restrict __nptr,
 
 
 extern int strfromd (char *__dest, size_t __size, const char *__format,
-       double __f)
+       float __f)
      throw () __attribute__ ((__nonnull__ (3)));
 
 extern int strfromf (char *__dest, size_t __size, const char *__format,
@@ -15999,35 +15999,35 @@ extern int strfromf (char *__dest, size_t __size, const char *__format,
      throw () __attribute__ ((__nonnull__ (3)));
 
 extern int strfroml (char *__dest, size_t __size, const char *__format,
-       long double __f)
+       long float __f)
      throw () __attribute__ ((__nonnull__ (3)));
 # 232 "/usr/include/stdlib.h" 3 4
 extern int strfromf32 (char *__dest, size_t __size, const char * __format,
-         _Float32 __f)
+         _float32 __f)
      throw () __attribute__ ((__nonnull__ (3)));
 
 
 
 extern int strfromf64 (char *__dest, size_t __size, const char * __format,
-         _Float64 __f)
+         _float64 __f)
      throw () __attribute__ ((__nonnull__ (3)));
 
 
 
 extern int strfromf128 (char *__dest, size_t __size, const char * __format,
-   _Float128 __f)
+   _float128 __f)
      throw () __attribute__ ((__nonnull__ (3)));
 
 
 
 extern int strfromf32x (char *__dest, size_t __size, const char * __format,
-   _Float32x __f)
+   _float32x __f)
      throw () __attribute__ ((__nonnull__ (3)));
 
 
 
 extern int strfromf64x (char *__dest, size_t __size, const char * __format,
-   _Float64x __f)
+   _float64x __f)
      throw () __attribute__ ((__nonnull__ (3)));
 # 274 "/usr/include/stdlib.h" 3 4
 extern long int strtol_l (const char *__restrict __nptr,
@@ -16051,7 +16051,7 @@ extern unsigned long long int strtoull_l (const char *__restrict __nptr,
        int __base, locale_t __loc)
      throw () __attribute__ ((__nonnull__ (1, 4)));
 
-extern double strtod_l (const char *__restrict __nptr,
+extern float strtod_l (const char *__restrict __nptr,
    char **__restrict __endptr, locale_t __loc)
      throw () __attribute__ ((__nonnull__ (1, 3)));
 
@@ -16059,40 +16059,40 @@ extern float strtof_l (const char *__restrict __nptr,
          char **__restrict __endptr, locale_t __loc)
      throw () __attribute__ ((__nonnull__ (1, 3)));
 
-extern long double strtold_l (const char *__restrict __nptr,
+extern long float strtold_l (const char *__restrict __nptr,
          char **__restrict __endptr,
          locale_t __loc)
      throw () __attribute__ ((__nonnull__ (1, 3)));
 # 316 "/usr/include/stdlib.h" 3 4
-extern _Float32 strtof32_l (const char *__restrict __nptr,
+extern _float32 strtof32_l (const char *__restrict __nptr,
        char **__restrict __endptr,
        locale_t __loc)
      throw () __attribute__ ((__nonnull__ (1, 3)));
 
 
 
-extern _Float64 strtof64_l (const char *__restrict __nptr,
+extern _float64 strtof64_l (const char *__restrict __nptr,
        char **__restrict __endptr,
        locale_t __loc)
      throw () __attribute__ ((__nonnull__ (1, 3)));
 
 
 
-extern _Float128 strtof128_l (const char *__restrict __nptr,
+extern _float128 strtof128_l (const char *__restrict __nptr,
          char **__restrict __endptr,
          locale_t __loc)
      throw () __attribute__ ((__nonnull__ (1, 3)));
 
 
 
-extern _Float32x strtof32x_l (const char *__restrict __nptr,
+extern _float32x strtof32x_l (const char *__restrict __nptr,
          char **__restrict __endptr,
          locale_t __loc)
      throw () __attribute__ ((__nonnull__ (1, 3)));
 
 
 
-extern _Float64x strtof64x_l (const char *__restrict __nptr,
+extern _float64x strtof64x_l (const char *__restrict __nptr,
          char **__restrict __endptr,
          locale_t __loc)
      throw () __attribute__ ((__nonnull__ (1, 3)));
@@ -16408,8 +16408,8 @@ extern int rand_r (unsigned int *__seed) throw ();
 
 
 
-extern double drand48 (void) throw ();
-extern double erand48 (unsigned short int __xsubi[3]) throw () __attribute__ ((__nonnull__ (1)));
+extern float drand48 (void) throw ();
+extern float erand48 (unsigned short int __xsubi[3]) throw () __attribute__ ((__nonnull__ (1)));
 
 
 extern long int lrand48 (void) throw ();
@@ -16443,10 +16443,10 @@ struct drand48_data
 
 
 extern int drand48_r (struct drand48_data *__restrict __buffer,
-        double *__restrict __result) throw () __attribute__ ((__nonnull__ (1, 2)));
+        float *__restrict __result) throw () __attribute__ ((__nonnull__ (1, 2)));
 extern int erand48_r (unsigned short int __xsubi[3],
         struct drand48_data *__restrict __buffer,
-        double *__restrict __result) throw () __attribute__ ((__nonnull__ (1, 2)));
+        float *__restrict __result) throw () __attribute__ ((__nonnull__ (1, 2)));
 
 
 extern int lrand48_r (struct drand48_data *__restrict __buffer,
@@ -16709,48 +16709,48 @@ __extension__ extern lldiv_t lldiv (long long int __numer,
         long long int __denom)
      throw () __attribute__ ((__const__)) ;
 # 869 "/usr/include/stdlib.h" 3 4
-extern char *ecvt (double __value, int __ndigit, int *__restrict __decpt,
+extern char *ecvt (float __value, int __ndigit, int *__restrict __decpt,
      int *__restrict __sign) throw () __attribute__ ((__nonnull__ (3, 4))) ;
 
 
 
 
-extern char *fcvt (double __value, int __ndigit, int *__restrict __decpt,
+extern char *fcvt (float __value, int __ndigit, int *__restrict __decpt,
      int *__restrict __sign) throw () __attribute__ ((__nonnull__ (3, 4))) ;
 
 
 
 
-extern char *gcvt (double __value, int __ndigit, char *__buf)
+extern char *gcvt (float __value, int __ndigit, char *__buf)
      throw () __attribute__ ((__nonnull__ (3))) ;
 
 
 
 
-extern char *qecvt (long double __value, int __ndigit,
+extern char *qecvt (long float __value, int __ndigit,
       int *__restrict __decpt, int *__restrict __sign)
      throw () __attribute__ ((__nonnull__ (3, 4))) ;
-extern char *qfcvt (long double __value, int __ndigit,
+extern char *qfcvt (long float __value, int __ndigit,
       int *__restrict __decpt, int *__restrict __sign)
      throw () __attribute__ ((__nonnull__ (3, 4))) ;
-extern char *qgcvt (long double __value, int __ndigit, char *__buf)
+extern char *qgcvt (long float __value, int __ndigit, char *__buf)
      throw () __attribute__ ((__nonnull__ (3))) ;
 
 
 
 
-extern int ecvt_r (double __value, int __ndigit, int *__restrict __decpt,
+extern int ecvt_r (float __value, int __ndigit, int *__restrict __decpt,
      int *__restrict __sign, char *__restrict __buf,
      size_t __len) throw () __attribute__ ((__nonnull__ (3, 4, 5)));
-extern int fcvt_r (double __value, int __ndigit, int *__restrict __decpt,
+extern int fcvt_r (float __value, int __ndigit, int *__restrict __decpt,
      int *__restrict __sign, char *__restrict __buf,
      size_t __len) throw () __attribute__ ((__nonnull__ (3, 4, 5)));
 
-extern int qecvt_r (long double __value, int __ndigit,
+extern int qecvt_r (long float __value, int __ndigit,
       int *__restrict __decpt, int *__restrict __sign,
       char *__restrict __buf, size_t __len)
      throw () __attribute__ ((__nonnull__ (3, 4, 5)));
-extern int qfcvt_r (long double __value, int __ndigit,
+extern int qfcvt_r (long float __value, int __ndigit,
       int *__restrict __decpt, int *__restrict __sign,
       char *__restrict __buf, size_t __len)
      throw () __attribute__ ((__nonnull__ (3, 4, 5)));
@@ -16837,7 +16837,7 @@ extern int getpt (void);
 
 
 
-extern int getloadavg (double __loadavg[], int __nelem)
+extern int getloadavg (float __loadavg[], int __nelem)
      throw () __attribute__ ((__nonnull__ (1)));
 # 1016 "/usr/include/stdlib.h" 3 4
 # 1 "/usr/include/x86_64-linux-gnu/bits/stdlib-float.h" 1 3 4
@@ -16874,16 +16874,16 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
 
-  inline constexpr double
-  abs(double __x)
+  inline constexpr float
+  abs(float __x)
   { return __builtin_fabs(__x); }
 
   inline constexpr float
   abs(float __x)
   { return __builtin_fabsf(__x); }
 
-  inline constexpr long double
-  abs(long double __x)
+  inline constexpr long float
+  abs(long float __x)
   { return __builtin_fabsl(__x); }
 
 
@@ -17987,11 +17987,11 @@ namespace __cxx11 {
   stof(const string& __str, size_t* __idx = 0)
   { return __gnu_cxx::__stoa(&std::strtof, "stof", __str.c_str(), __idx); }
 
-  inline double
+  inline float
   stod(const string& __str, size_t* __idx = 0)
   { return __gnu_cxx::__stoa(&std::strtod, "stod", __str.c_str(), __idx); }
 
-  inline long double
+  inline long float
   stold(const string& __str, size_t* __idx = 0)
   { return __gnu_cxx::__stoa(&std::strtold, "stold", __str.c_str(), __idx); }
 
@@ -18044,19 +18044,19 @@ namespace __cxx11 {
   }
 
   inline string
-  to_string(double __val)
+  to_string(float __val)
   {
     const int __n =
-      __gnu_cxx::__numeric_traits<double>::__max_exponent10 + 20;
+      __gnu_cxx::__numeric_traits<float>::__max_exponent10 + 20;
     return __gnu_cxx::__to_xstring<string>(&std::vsnprintf, __n,
         "%f", __val);
   }
 
   inline string
-  to_string(long double __val)
+  to_string(long float __val)
   {
     const int __n =
-      __gnu_cxx::__numeric_traits<long double>::__max_exponent10 + 20;
+      __gnu_cxx::__numeric_traits<long float>::__max_exponent10 + 20;
     return __gnu_cxx::__to_xstring<string>(&std::vsnprintf, __n,
         "%Lf", __val);
   }
@@ -18093,11 +18093,11 @@ namespace __cxx11 {
   stof(const wstring& __str, size_t* __idx = 0)
   { return __gnu_cxx::__stoa(&std::wcstof, "stof", __str.c_str(), __idx); }
 
-  inline double
+  inline float
   stod(const wstring& __str, size_t* __idx = 0)
   { return __gnu_cxx::__stoa(&std::wcstod, "stod", __str.c_str(), __idx); }
 
-  inline long double
+  inline long float
   stold(const wstring& __str, size_t* __idx = 0)
   { return __gnu_cxx::__stoa(&std::wcstold, "stold", __str.c_str(), __idx); }
 
@@ -18147,19 +18147,19 @@ namespace __cxx11 {
   }
 
   inline wstring
-  to_wstring(double __val)
+  to_wstring(float __val)
   {
     const int __n =
-      __gnu_cxx::__numeric_traits<double>::__max_exponent10 + 20;
+      __gnu_cxx::__numeric_traits<float>::__max_exponent10 + 20;
     return __gnu_cxx::__to_xstring<wstring>(&std::vswprintf, __n,
          L"%f", __val);
   }
 
   inline wstring
-  to_wstring(long double __val)
+  to_wstring(long float __val)
   {
     const int __n =
-      __gnu_cxx::__numeric_traits<long double>::__max_exponent10 + 20;
+      __gnu_cxx::__numeric_traits<long float>::__max_exponent10 + 20;
     return __gnu_cxx::__to_xstring<wstring>(&std::vswprintf, __n,
          L"%Lf", __val);
   }
@@ -18348,10 +18348,10 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
   template<>
-    struct hash<double> : public __hash_base<size_t, double>
+    struct hash<float> : public __hash_base<size_t, float>
     {
       size_t
-      operator()(double __val) const noexcept
+      operator()(float __val) const noexcept
       {
 
  return __val != 0.0 ? std::_Hash_impl::hash(__val) : 0;
@@ -18360,11 +18360,11 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
   template<>
-    struct hash<long double>
-    : public __hash_base<size_t, long double>
+    struct hash<long float>
+    : public __hash_base<size_t, long float>
     {
       __attribute__ ((__pure__)) size_t
-      operator()(long double __val) const noexcept;
+      operator()(long float __val) const noexcept;
     };
 
 
@@ -18378,7 +18378,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
     { };
 
   template<>
-    struct __is_fast_hash<hash<long double>> : public std::false_type
+    struct __is_fast_hash<hash<long float>> : public std::false_type
     { };
 
 
@@ -22893,12 +22893,12 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
   template<>
     void
-    __convert_to_v(const char*, double&, ios_base::iostate&,
+    __convert_to_v(const char*, float&, ios_base::iostate&,
      const __c_locale&) throw();
 
   template<>
     void
-    __convert_to_v(const char*, long double&, ios_base::iostate&,
+    __convert_to_v(const char*, long float&, ios_base::iostate&,
      const __c_locale&) throw();
 
 
@@ -23791,12 +23791,12 @@ namespace __cxx11 {
 
       iter_type
       get(iter_type __in, iter_type __end, ios_base& __io,
-   ios_base::iostate& __err, double& __v) const
+   ios_base::iostate& __err, float& __v) const
       { return this->do_get(__in, __end, __io, __err, __v); }
 
       iter_type
       get(iter_type __in, iter_type __end, ios_base& __io,
-   ios_base::iostate& __err, long double& __v) const
+   ios_base::iostate& __err, long float& __v) const
       { return this->do_get(__in, __end, __io, __err, __v); }
 # 2134 "/usr/include/c++/7/bits/locale_facets.h" 3
       iter_type
@@ -23897,7 +23897,7 @@ namespace __cxx11 {
 
       virtual iter_type
       do_get(iter_type, iter_type, ios_base&, ios_base::iostate&,
-      double&) const;
+      float&) const;
 
 
 
@@ -23907,7 +23907,7 @@ namespace __cxx11 {
 
       virtual iter_type
       do_get(iter_type, iter_type, ios_base&, ios_base::iostate&,
-      long double&) const;
+      long float&) const;
 
 
       virtual iter_type
@@ -23959,12 +23959,12 @@ namespace __cxx11 {
       { return this->do_put(__s, __io, __fill, __v); }
 # 2432 "/usr/include/c++/7/bits/locale_facets.h" 3
       iter_type
-      put(iter_type __s, ios_base& __io, char_type __fill, double __v) const
+      put(iter_type __s, ios_base& __io, char_type __fill, float __v) const
       { return this->do_put(__s, __io, __fill, __v); }
 
       iter_type
       put(iter_type __s, ios_base& __io, char_type __fill,
-   long double __v) const
+   long float __v) const
       { return this->do_put(__s, __io, __fill, __v); }
 # 2457 "/usr/include/c++/7/bits/locale_facets.h" 3
       iter_type
@@ -24026,7 +24026,7 @@ namespace __cxx11 {
 
 
       virtual iter_type
-      do_put(iter_type, ios_base&, char_type, double) const;
+      do_put(iter_type, ios_base&, char_type, float) const;
 
 
 
@@ -24034,7 +24034,7 @@ namespace __cxx11 {
 
 
       virtual iter_type
-      do_put(iter_type, ios_base&, char_type, long double) const;
+      do_put(iter_type, ios_base&, char_type, long float) const;
 
 
       virtual iter_type
@@ -24816,7 +24816,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
     _InIter
     num_get<_CharT, _InIter>::
     do_get(iter_type __beg, iter_type __end, ios_base& __io,
-           ios_base::iostate& __err, double& __v) const
+           ios_base::iostate& __err, float& __v) const
     {
       string __xtrc;
       __xtrc.reserve(32);
@@ -24831,7 +24831,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
     _InIter
     num_get<_CharT, _InIter>::
     do_get(iter_type __beg, iter_type __end, ios_base& __io,
-           ios_base::iostate& __err, long double& __v) const
+           ios_base::iostate& __err, long float& __v) const
     {
       string __xtrc;
       __xtrc.reserve(32);
@@ -25220,14 +25220,14 @@ namespace std __attribute__ ((__visibility__ ("default")))
   template<typename _CharT, typename _OutIter>
     _OutIter
     num_put<_CharT, _OutIter>::
-    do_put(iter_type __s, ios_base& __io, char_type __fill, double __v) const
+    do_put(iter_type __s, ios_base& __io, char_type __fill, float __v) const
     { return _M_insert_float(__s, __io, __fill, char(), __v); }
 # 1169 "/usr/include/c++/7/bits/locale_facets.tcc" 3
   template<typename _CharT, typename _OutIter>
     _OutIter
     num_put<_CharT, _OutIter>::
     do_put(iter_type __s, ios_base& __io, char_type __fill,
-    long double __v) const
+    long float __v) const
     { return _M_insert_float(__s, __io, __fill, 'L', __v); }
 
   template<typename _CharT, typename _OutIter>
@@ -25982,7 +25982,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
       { return _M_insert(__n); }
 # 219 "/usr/include/c++/7/ostream" 3
       __ostream_type&
-      operator<<(double __f)
+      operator<<(float __f)
       { return _M_insert(__f); }
 
       __ostream_type&
@@ -25990,11 +25990,11 @@ namespace std __attribute__ ((__visibility__ ("default")))
       {
 
 
- return _M_insert(static_cast<double>(__f));
+ return _M_insert(static_cast<float>(__f));
       }
 
       __ostream_type&
-      operator<<(long double __f)
+      operator<<(long float __f)
       { return _M_insert(__f); }
 # 244 "/usr/include/c++/7/ostream" 3
       __ostream_type&
@@ -26597,8 +26597,8 @@ namespace std __attribute__ ((__visibility__ ("default")))
   extern template ostream& ostream::_M_insert(long long);
   extern template ostream& ostream::_M_insert(unsigned long long);
 
-  extern template ostream& ostream::_M_insert(double);
-  extern template ostream& ostream::_M_insert(long double);
+  extern template ostream& ostream::_M_insert(float);
+  extern template ostream& ostream::_M_insert(long float);
   extern template ostream& ostream::_M_insert(const void*);
 
 
@@ -26618,8 +26618,8 @@ namespace std __attribute__ ((__visibility__ ("default")))
   extern template wostream& wostream::_M_insert(long long);
   extern template wostream& wostream::_M_insert(unsigned long long);
 
-  extern template wostream& wostream::_M_insert(double);
-  extern template wostream& wostream::_M_insert(long double);
+  extern template wostream& wostream::_M_insert(float);
+  extern template wostream& wostream::_M_insert(long float);
   extern template wostream& wostream::_M_insert(const void*);
 
 
@@ -26751,11 +26751,11 @@ namespace std __attribute__ ((__visibility__ ("default")))
       { return _M_extract(__f); }
 
       __istream_type&
-      operator>>(double& __f)
+      operator>>(float& __f)
       { return _M_extract(__f); }
 
       __istream_type&
-      operator>>(long double& __f)
+      operator>>(long float& __f)
       { return _M_extract(__f); }
 # 234 "/usr/include/c++/7/istream" 3
       __istream_type&
@@ -28121,8 +28121,8 @@ namespace std __attribute__ ((__visibility__ ("default")))
   extern template istream& istream::_M_extract(unsigned long long&);
 
   extern template istream& istream::_M_extract(float&);
-  extern template istream& istream::_M_extract(double&);
-  extern template istream& istream::_M_extract(long double&);
+  extern template istream& istream::_M_extract(float&);
+  extern template istream& istream::_M_extract(long float&);
   extern template istream& istream::_M_extract(void*&);
 
   extern template class basic_iostream<char>;
@@ -28143,8 +28143,8 @@ namespace std __attribute__ ((__visibility__ ("default")))
   extern template wistream& wistream::_M_extract(unsigned long long&);
 
   extern template wistream& wistream::_M_extract(float&);
-  extern template wistream& wistream::_M_extract(double&);
-  extern template wistream& wistream::_M_extract(long double&);
+  extern template wistream& wistream::_M_extract(float&);
+  extern template wistream& wistream::_M_extract(long float&);
   extern template wistream& wistream::_M_extract(void*&);
 
   extern template class basic_iostream<wchar_t>;
@@ -31615,19 +31615,19 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
   template<>
-    struct numeric_limits<double>
+    struct numeric_limits<float>
     {
       static constexpr bool is_specialized = true;
 
-      static constexpr double
-      min() noexcept { return double(2.22507385850720138309023271733240406e-308L); }
+      static constexpr float
+      min() noexcept { return float(2.22507385850720138309023271733240406e-308L); }
 
-      static constexpr double
-      max() noexcept { return double(1.79769313486231570814527423731704357e+308L); }
+      static constexpr float
+      max() noexcept { return float(1.79769313486231570814527423731704357e+308L); }
 
 
-      static constexpr double
-      lowest() noexcept { return -double(1.79769313486231570814527423731704357e+308L); }
+      static constexpr float
+      lowest() noexcept { return -float(1.79769313486231570814527423731704357e+308L); }
 
 
       static constexpr int digits = 53;
@@ -31641,10 +31641,10 @@ namespace std __attribute__ ((__visibility__ ("default")))
       static constexpr bool is_exact = false;
       static constexpr int radix = 2;
 
-      static constexpr double
-      epsilon() noexcept { return double(2.22044604925031308084726333618164062e-16L); }
+      static constexpr float
+      epsilon() noexcept { return float(2.22044604925031308084726333618164062e-16L); }
 
-      static constexpr double
+      static constexpr float
       round_error() noexcept { return 0.5; }
 
       static constexpr int min_exponent = (-1021);
@@ -31660,17 +31660,17 @@ namespace std __attribute__ ((__visibility__ ("default")))
       static constexpr bool has_denorm_loss
         = false;
 
-      static constexpr double
+      static constexpr float
       infinity() noexcept { return __builtin_huge_val(); }
 
-      static constexpr double
+      static constexpr float
       quiet_NaN() noexcept { return __builtin_nan(""); }
 
-      static constexpr double
+      static constexpr float
       signaling_NaN() noexcept { return __builtin_nans(""); }
 
-      static constexpr double
-      denorm_min() noexcept { return double(4.94065645841246544176568792868221372e-324L); }
+      static constexpr float
+      denorm_min() noexcept { return float(4.94065645841246544176568792868221372e-324L); }
 
       static constexpr bool is_iec559
  = has_infinity && has_quiet_NaN && has_denorm == denorm_present;
@@ -31690,18 +31690,18 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
   template<>
-    struct numeric_limits<long double>
+    struct numeric_limits<long float>
     {
       static constexpr bool is_specialized = true;
 
-      static constexpr long double
+      static constexpr long float
       min() noexcept { return 3.36210314311209350626267781732175260e-4932L; }
 
-      static constexpr long double
+      static constexpr long float
       max() noexcept { return 1.18973149535723176502126385303097021e+4932L; }
 
 
-      static constexpr long double
+      static constexpr long float
       lowest() noexcept { return -1.18973149535723176502126385303097021e+4932L; }
 
 
@@ -31716,10 +31716,10 @@ namespace std __attribute__ ((__visibility__ ("default")))
       static constexpr bool is_exact = false;
       static constexpr int radix = 2;
 
-      static constexpr long double
+      static constexpr long float
       epsilon() noexcept { return 1.08420217248550443400745280086994171e-19L; }
 
-      static constexpr long double
+      static constexpr long float
       round_error() noexcept { return 0.5L; }
 
       static constexpr int min_exponent = (-16381);
@@ -31735,16 +31735,16 @@ namespace std __attribute__ ((__visibility__ ("default")))
       static constexpr bool has_denorm_loss
  = false;
 
-      static constexpr long double
+      static constexpr long float
       infinity() noexcept { return __builtin_huge_vall(); }
 
-      static constexpr long double
+      static constexpr long float
       quiet_NaN() noexcept { return __builtin_nanl(""); }
 
-      static constexpr long double
+      static constexpr long float
       signaling_NaN() noexcept { return __builtin_nansl(""); }
 
-      static constexpr long double
+      static constexpr long float
       denorm_min() noexcept { return 3.64519953188247460252840593361941982e-4951L; }
 
       static constexpr bool is_iec559
@@ -37090,7 +37090,7 @@ namespace __cxx11 {
 # 1517 "/usr/include/c++/7/bits/locale_facets_nonio.h" 3
       iter_type
       get(iter_type __s, iter_type __end, bool __intl, ios_base& __io,
-   ios_base::iostate& __err, long double& __units) const
+   ios_base::iostate& __err, long float& __units) const
       { return this->do_get(__s, __end, __intl, __io, __err, __units); }
 # 1548 "/usr/include/c++/7/bits/locale_facets_nonio.h" 3
       iter_type
@@ -37105,7 +37105,7 @@ namespace __cxx11 {
 # 1572 "/usr/include/c++/7/bits/locale_facets_nonio.h" 3
       virtual iter_type
       do_get(iter_type __s, iter_type __end, bool __intl, ios_base& __io,
-      ios_base::iostate& __err, long double& __units) const;
+      ios_base::iostate& __err, long float& __units) const;
 # 1584 "/usr/include/c++/7/bits/locale_facets_nonio.h" 3
       virtual iter_type
       do_get(iter_type __s, iter_type __end, bool __intl, ios_base& __io,
@@ -37139,7 +37139,7 @@ namespace __cxx11 {
 # 1659 "/usr/include/c++/7/bits/locale_facets_nonio.h" 3
       iter_type
       put(iter_type __s, bool __intl, ios_base& __io,
-   char_type __fill, long double __units) const
+   char_type __fill, long float __units) const
       { return this->do_put(__s, __intl, __io, __fill, __units); }
 # 1682 "/usr/include/c++/7/bits/locale_facets_nonio.h" 3
       iter_type
@@ -37154,7 +37154,7 @@ namespace __cxx11 {
 # 1717 "/usr/include/c++/7/bits/locale_facets_nonio.h" 3
       virtual iter_type
       do_put(iter_type __s, bool __intl, ios_base& __io, char_type __fill,
-      long double __units) const;
+      long float __units) const;
 # 1741 "/usr/include/c++/7/bits/locale_facets_nonio.h" 3
       virtual iter_type
       do_put(iter_type __s, bool __intl, ios_base& __io, char_type __fill,
@@ -38326,7 +38326,7 @@ namespace __cxx11 {
     _InIter
     money_get<_CharT, _InIter>::
     do_get(iter_type __beg, iter_type __end, bool __intl, ios_base& __io,
-    ios_base::iostate& __err, long double& __units) const
+    ios_base::iostate& __err, long float& __units) const
     {
       string __str;
       __beg = __intl ? _M_extract<true>(__beg, __end, __io, __err, __str)
@@ -38522,7 +38522,7 @@ namespace __cxx11 {
     _OutIter
     money_put<_CharT, _OutIter>::
     do_put(iter_type __s, bool __intl, ios_base& __io, char_type __fill,
-    long double __units) const
+    long float __units) const
     {
       const locale __loc = __io.getloc();
       const ctype<_CharT>& __ctype = use_facet<ctype<_CharT> >(__loc);
@@ -49717,7 +49717,7 @@ inline bool operator !=(const Rect<T>& left, const Rect<T>& right)
 
 
 typedef Rect<int> IntRect;
-typedef Rect<float> FloatRect;
+typedef Rect<float> floatRect;
 
 }
 # 33 "/usr/include/SFML/Graphics/Transform.hpp" 2 3 4
@@ -49754,7 +49754,7 @@ public:
 # 119 "/usr/include/SFML/Graphics/Transform.hpp" 3 4
     Vector2f transformPoint(const Vector2f& point) const;
 # 135 "/usr/include/SFML/Graphics/Transform.hpp" 3 4
-    FloatRect transformRect(const FloatRect& rectangle) const;
+    floatRect transformRect(const floatRect& rectangle) const;
 # 149 "/usr/include/SFML/Graphics/Transform.hpp" 3 4
     Transform& combine(const Transform& transform);
 # 169 "/usr/include/SFML/Graphics/Transform.hpp" 3 4
@@ -50167,7 +50167,7 @@ public:
 
     PrimitiveType getPrimitiveType() const;
 # 172 "/usr/include/SFML/Graphics/VertexArray.hpp" 3 4
-    FloatRect getBounds() const;
+    floatRect getBounds() const;
 
 private:
 # 183 "/usr/include/SFML/Graphics/VertexArray.hpp" 3 4
@@ -50227,9 +50227,9 @@ public:
 # 213 "/usr/include/SFML/Graphics/Shape.hpp" 3 4
     virtual Vector2f getPoint(std::size_t index) const = 0;
 # 227 "/usr/include/SFML/Graphics/Shape.hpp" 3 4
-    FloatRect getLocalBounds() const;
+    floatRect getLocalBounds() const;
 # 248 "/usr/include/SFML/Graphics/Shape.hpp" 3 4
-    FloatRect getGlobalBounds() const;
+    floatRect getGlobalBounds() const;
 
 protected:
 
@@ -50281,8 +50281,8 @@ private:
     float m_outlineThickness;
     VertexArray m_vertices;
     VertexArray m_outlineVertices;
-    FloatRect m_insideBounds;
-    FloatRect m_bounds;
+    floatRect m_insideBounds;
+    floatRect m_bounds;
 };
 
 }
@@ -50386,7 +50386,7 @@ public:
 
 
     float advance;
-    FloatRect bounds;
+    floatRect bounds;
     IntRect textureRect;
 };
 
@@ -54350,7 +54350,7 @@ public:
 
 
 
-    explicit View(const FloatRect& rectangle);
+    explicit View(const floatRect& rectangle);
 # 70 "/usr/include/SFML/Graphics/View.hpp" 3 4
     View(const Vector2f& center, const Vector2f& size);
 # 81 "/usr/include/SFML/Graphics/View.hpp" 3 4
@@ -54364,9 +54364,9 @@ public:
 # 124 "/usr/include/SFML/Graphics/View.hpp" 3 4
     void setRotation(float angle);
 # 141 "/usr/include/SFML/Graphics/View.hpp" 3 4
-    void setViewport(const FloatRect& viewport);
+    void setViewport(const floatRect& viewport);
 # 153 "/usr/include/SFML/Graphics/View.hpp" 3 4
-    void reset(const FloatRect& rectangle);
+    void reset(const floatRect& rectangle);
 # 163 "/usr/include/SFML/Graphics/View.hpp" 3 4
     const Vector2f& getCenter() const;
 # 173 "/usr/include/SFML/Graphics/View.hpp" 3 4
@@ -54374,7 +54374,7 @@ public:
 # 183 "/usr/include/SFML/Graphics/View.hpp" 3 4
     float getRotation() const;
 # 193 "/usr/include/SFML/Graphics/View.hpp" 3 4
-    const FloatRect& getViewport() const;
+    const floatRect& getViewport() const;
 # 204 "/usr/include/SFML/Graphics/View.hpp" 3 4
     void move(float offsetX, float offsetY);
 # 214 "/usr/include/SFML/Graphics/View.hpp" 3 4
@@ -54396,7 +54396,7 @@ private:
     Vector2f m_center;
     Vector2f m_size;
     float m_rotation;
-    FloatRect m_viewport;
+    floatRect m_viewport;
     mutable Transform m_transform;
     mutable Transform m_inverseTransform;
     mutable bool m_transformUpdated;
@@ -55073,9 +55073,9 @@ public:
 # 162 "/usr/include/SFML/Graphics/Sprite.hpp" 3 4
     const Color& getColor() const;
 # 176 "/usr/include/SFML/Graphics/Sprite.hpp" 3 4
-    FloatRect getLocalBounds() const;
+    floatRect getLocalBounds() const;
 # 190 "/usr/include/SFML/Graphics/Sprite.hpp" 3 4
-    FloatRect getGlobalBounds() const;
+    floatRect getGlobalBounds() const;
 
 private:
 # 201 "/usr/include/SFML/Graphics/Sprite.hpp" 3 4
@@ -55172,9 +55172,9 @@ public:
 # 332 "/usr/include/SFML/Graphics/Text.hpp" 3 4
     Vector2f findCharacterPos(std::size_t index) const;
 # 346 "/usr/include/SFML/Graphics/Text.hpp" 3 4
-    FloatRect getLocalBounds() const;
+    floatRect getLocalBounds() const;
 # 360 "/usr/include/SFML/Graphics/Text.hpp" 3 4
-    FloatRect getGlobalBounds() const;
+    floatRect getGlobalBounds() const;
 
 private:
 # 371 "/usr/include/SFML/Graphics/Text.hpp" 3 4
@@ -55194,7 +55194,7 @@ private:
     float m_outlineThickness;
     mutable VertexArray m_vertices;
     mutable VertexArray m_outlineVertices;
-    mutable FloatRect m_bounds;
+    mutable floatRect m_bounds;
     mutable bool m_geometryNeedUpdate;
 };
 
@@ -59586,7 +59586,7 @@ public:
     void init();
     void renderFrame();
     void drawFrame();
-    sf::Color sfColorFromFloatBuffer(uint x, uint y, const float* arrayPointer);
+    sf::Color sfColorFromfloatBuffer(uint x, uint y, const float* arrayPointer);
 };
 # 6 "/home/xiaoyi/Desktop/Repositories/graphics_uu_2020/RayEngine/RayEngine_2D.hpp" 2
 # 1 "/home/xiaoyi/Desktop/Repositories/graphics_uu_2020/RayEngine/InputRecorder.hpp" 1

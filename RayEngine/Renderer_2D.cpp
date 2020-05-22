@@ -41,15 +41,15 @@ void Renderer_2D::drawFrame(){
 sf::Color Renderer_2D::getRenderBufferColor(int x, int y){
     int index = (x + y * WINDOW_RESOLUTION_X) * 4;
 
-    sf::Uint8 r = static_cast<sf::Uint8>(getBoundedFloat(colorBuffer[index + 0]) * 255.0f);
-    sf::Uint8 g = static_cast<sf::Uint8>(getBoundedFloat(colorBuffer[index + 1]) * 255.0f);
-    sf::Uint8 b = static_cast<sf::Uint8>(getBoundedFloat(colorBuffer[index + 2]) * 255.0f);
-    sf::Uint8 a = static_cast<sf::Uint8>(getBoundedFloat(colorBuffer[index + 3]) * 255.0f);
+    sf::Uint8 r = static_cast<sf::Uint8>(getBoundedfloat(colorBuffer[index + 0]) * 255.0f);
+    sf::Uint8 g = static_cast<sf::Uint8>(getBoundedfloat(colorBuffer[index + 1]) * 255.0f);
+    sf::Uint8 b = static_cast<sf::Uint8>(getBoundedfloat(colorBuffer[index + 2]) * 255.0f);
+    sf::Uint8 a = static_cast<sf::Uint8>(getBoundedfloat(colorBuffer[index + 3]) * 255.0f);
 
     return sf::Color(r,g,b,a);
 }
 
-float Renderer_2D::getBoundedFloat(float number){
+float Renderer_2D::getBoundedfloat(float number){
     if(number > 1){
         return 1;
     }
