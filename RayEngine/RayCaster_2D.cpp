@@ -11,7 +11,6 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
     std::unique_ptr<float[]> heapBuffer = std::make_unique<float[]>(COLOR_BUFFER_SIZE);
     Ray_2D ray = Ray_2D();
     bool occluded = false;
-    sf::Vector2f lightPosition;
 
     for(uint y = 0; y < WINDOW_RESOLUTION_Y; y++){
         
@@ -24,10 +23,9 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
             heapBuffer.get()[pixelIndex + 3] = 1;
 
             for(Light_2D & light : lightVector){
-                lightPosition = light.getPosition();
                 
                 ray.setPosition(sf::Vector2i(x,y));
-                ray.setNormalizedDirectionAndDistance(lightPosition);
+                ray.setNormalizedDirectionAndDistance(light.getPosition());
 
                 for(std::shared_ptr<Circle_2D> object : objects){
                     occluded = ray.intersects(object); 
