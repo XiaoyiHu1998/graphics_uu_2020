@@ -1,8 +1,9 @@
 #ifndef CIRCLE_2D_HPP
 #define CIRCLE_2D_HPP
 
-#include "GeometricObject_2D.hpp"
-class Circle_2D : public GeometricObject_2D{
+#include "Object_2D.hpp"
+
+class Circle_2D : public Object_2D{
 private:
     float radius;
 public:

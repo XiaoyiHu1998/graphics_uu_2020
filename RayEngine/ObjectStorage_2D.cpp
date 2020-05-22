@@ -6,8 +6,8 @@ std::vector<Light_2D>& ObjectStorage_2D::getLightVector(){
     return lightVector;
 }
 
-std::vector<GeometricObject_2D>& ObjectStorage_2D::getGeometricObjects(){
-    return geometricObjects;
+std::vector<Object_2D>& ObjectStorage_2D::getobjects(){
+    return objects;
 }
 
 void ObjectStorage_2D::init(){
@@ -18,5 +18,5 @@ void ObjectStorage_2D::init(){
             Light_2D(sf::Vector2f(600, 350), sf::Vector3f(0.2, 0.5, 0.4))
     };
 
-    geometricObjects = std::vector<GeometricObject_2D>{GeometricObject_2D()};
+    objects = std::vector<Object_2D>{Object_2D()};
 }

@@ -3,7 +3,7 @@
 RayCaster_2D::RayCaster_2D()
 {}
 
-std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<GeometricObject_2D> & geometricObjects){
+std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<Object_2D> & objects){
 
     std::unique_ptr<float[]> heapBuffer = std::make_unique<float[]>(COLOR_BUFFER_SIZE);
     bool occluded = false;
@@ -26,7 +26,7 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
                 ray.setNormalizedDirection(lightPosition);
                 ray.setDistanceToLight(lightPosition);
 
-                for(GeometricObject_2D & object : geometricObjects){
+                for(Object_2D & object : objects){
                     occluded = ray.intersects(object);
                 }
 
@@ -54,5 +54,5 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
 }
 
 float RayCaster_2D::lightAttenuation(float distance){
-    return 1 / (distance); 
+    return 1 / (distance) ; 
 }

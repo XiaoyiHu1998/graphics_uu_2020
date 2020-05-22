@@ -1,7 +1,7 @@
 #ifndef LIGHT_2D_HPP
 #define LIGHT_2D_HPP
 
-#include "Object.hpp"
+#include "masterInclude.hpp"
 #include <chrono>
 
 class Light_2D{

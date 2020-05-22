@@ -13,7 +13,7 @@ private:
     float calculateLength(const sf::Vector2f & vector);
 public:
     Ray_2D();
-    const bool intersects(const GeometricObject_2D & object);
+    const bool intersects(const Object_2D & object);
     const void setPosition(const sf::Vector2i & position);
     const void setNormalizedDirection(const sf::Vector2f & lightPosition);
     const void setDistanceToLight(const sf::Vector2f & lightPosition);

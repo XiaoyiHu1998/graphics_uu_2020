@@ -7,7 +7,7 @@ Ray_2D::Ray_2D():
     distanceToLight{0}
 {}
 
-const bool Ray_2D::intersects(const GeometricObject_2D & object){
+const bool Ray_2D::intersects(const Object_2D & object){
     return false;
 }
 

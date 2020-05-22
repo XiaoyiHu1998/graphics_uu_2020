@@ -59492,32 +59492,32 @@ public:
     sf::Vector3f getColor(){return lightColor;};
 };
 # 5 "/home/xiaoyi/Desktop/Repositories/graphics_uu_2020/RayEngine/WorldEnviroment_2D.hpp" 2
-# 1 "/home/xiaoyi/Desktop/Repositories/graphics_uu_2020/RayEngine/GeometricObject_2D.hpp" 1
+# 1 "/home/xiaoyi/Desktop/Repositories/graphics_uu_2020/RayEngine/Object_2D.hpp" 1
 
 
 
 
 
-class GeometricObject_2D : public Object{
+class Object_2D : public Object{
 private:
     sf::Vector2f position;
     std::vector<sf::Vector2f> geometry;
     sf::Vector3f color;
 public:
-    GeometricObject_2D(){};
+    Object_2D(){};
 };
 # 6 "/home/xiaoyi/Desktop/Repositories/graphics_uu_2020/RayEngine/WorldEnviroment_2D.hpp" 2
 
 class WorldEnviroment_2D{
 private:
     std::vector<Light_2D> lightVector;
-    std::vector<GeometricObject_2D> geometricObjects;
+    std::vector<Object_2D> objects;
 public:
     WorldEnviroment_2D();
     void init();
     void import();
     std::shared_ptr<std::vector<Light_2D>> getLightVector();
-    std::shared_ptr<std::vector<GeometricObject_2D>> getGeometricObjects();
+    std::shared_ptr<std::vector<Object_2D>> getobjects();
 };
 # 5 "/home/xiaoyi/Desktop/Repositories/graphics_uu_2020/RayEngine/RayEngine_2D.hpp" 2
 # 1 "/home/xiaoyi/Desktop/Repositories/graphics_uu_2020/RayEngine/Renderer_2D.hpp" 1
@@ -59544,7 +59544,7 @@ private:
     float calculateLength(sf::Vector2f vector);
 public:
     Ray_2D();
-    bool intersects(GeometricObject_2D* object);
+    bool intersects(Object_2D* object);
     void setPosition(sf::Vector2i position);
     void setNormalizedDirection(sf::Vector2f lightPosition);
     void setDistanceToLight(sf::Vector2f lightPosition);

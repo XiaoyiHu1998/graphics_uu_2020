@@ -18,7 +18,7 @@ void Renderer_2D::init(){
 
 void Renderer_2D::renderFrame(){
 
-    colorBuffer = rayCaster.castRays(objectStorage.getLightVector(), objectStorage.getGeometricObjects());
+    colorBuffer = rayCaster.castRays(objectStorage.getLightVector(), objectStorage.getobjects());
     
     for(uint y = 0; y < WINDOW_RESOLUTION_Y; y++){
         for(uint x = 0; x < WINDOW_RESOLUTION_X; x++){
@@ -41,12 +41,24 @@ void Renderer_2D::drawFrame(){
 sf::Color Renderer_2D::getRenderBufferColor(int x, int y){
     int index = (x + y * WINDOW_RESOLUTION_X) * 4;
 
-    sf::Uint8 r = static_cast<sf::Uint8>(colorBuffer[index + 0] * 255.0f);
-    sf::Uint8 g = static_cast<sf::Uint8>(colorBuffer[index + 1] * 255.0f);
-    sf::Uint8 b = static_cast<sf::Uint8>(colorBuffer[index + 2] * 255.0f);
-    sf::Uint8 a = static_cast<sf::Uint8>(colorBuffer[index + 3] * 255.0f);
+    sf::Uint8 r = static_cast<sf::Uint8>(getBoundedFloat(colorBuffer[index + 0]) * 255.0f);
+    sf::Uint8 g = static_cast<sf::Uint8>(getBoundedFloat(colorBuffer[index + 1]) * 255.0f);
+    sf::Uint8 b = static_cast<sf::Uint8>(getBoundedFloat(colorBuffer[index + 2]) * 255.0f);
+    sf::Uint8 a = static_cast<sf::Uint8>(getBoundedFloat(colorBuffer[index + 3]) * 255.0f);
 
     return sf::Color(r,g,b,a);
+}
+
+float Renderer_2D::getBoundedFloat(float number){
+    if(number > 1){
+        return 1;
+    }
+    else if(number > 0){
+        return number;
+    }
+    else{
+        return 0;
+    }
 }
 
 sf::RenderWindow* Renderer_2D::getWindowPointer(){
