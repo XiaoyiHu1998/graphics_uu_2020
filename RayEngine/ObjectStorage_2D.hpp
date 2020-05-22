@@ -2,7 +2,7 @@
 #define OBJECT_STORAGE_2D_HPP
 
 #include "Light_2D.hpp"
-#include "Object_2D.hpp"
+#include "Circle_2D.hpp"
 
 class ObjectStorage_2D{
 private:

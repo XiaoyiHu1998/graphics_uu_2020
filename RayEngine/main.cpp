@@ -3,7 +3,7 @@
 
 int main(){
     std::cout << "running" << std::endl;
-    RayEngine_2D rayEngine = RayEngine_2D();
+    RayEngine_2D rayEngine;
     rayEngine.init();
 
     sf::RenderWindow* window = rayEngine.getWindowPointer();
@@ -16,8 +16,8 @@ int main(){
             if(event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)){
                 window->close();
             }
-
-            rayEngine.renderLoop();
         }
+
+        rayEngine.renderLoop();
     }
 }

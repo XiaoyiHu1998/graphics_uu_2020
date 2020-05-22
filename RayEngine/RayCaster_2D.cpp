@@ -33,10 +33,11 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
                 if(!occluded){
                     sf::Vector3f lightColorVec3 = light.getColor();
                     float attenuationValue = lightAttenuation(ray.getDistanceToLight());
+                    float intensity = light.getLightIntensity();
 
-                    heapBuffer.get()[pixelIndex + 0] += lightColorVec3.x * attenuationValue;
-                    heapBuffer.get()[pixelIndex + 1] += lightColorVec3.y * attenuationValue;
-                    heapBuffer.get()[pixelIndex + 2] += lightColorVec3.z * attenuationValue;
+                    heapBuffer.get()[pixelIndex + 0] += lightColorVec3.x * attenuationValue * intensity;
+                    heapBuffer.get()[pixelIndex + 1] += lightColorVec3.y * attenuationValue * intensity;
+                    heapBuffer.get()[pixelIndex + 2] += lightColorVec3.z * attenuationValue * intensity;
                     heapBuffer.get()[pixelIndex + 3] = 1;
                 }
             }

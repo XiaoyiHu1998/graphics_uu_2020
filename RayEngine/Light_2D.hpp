@@ -6,14 +6,14 @@
 
 class Light_2D{
 private:
-    sf::Vector2f origin;
     sf::Vector2f position;
-    float spinRadius;
     sf::Vector3f lightColor;
+    float lightIntensity;
 public:
-    Light_2D(const sf::Vector2f & position, const sf::Vector3f & lightColor);
+    Light_2D(const sf::Vector2f & position, const sf::Vector3f & lightColor, float intensity);
     const sf::Vector2f getPosition();
     const sf::Vector3f getColor();
+    float getLightIntensity();
     void updatePosition();
     void updateColor();
 };

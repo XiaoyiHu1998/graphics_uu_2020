@@ -4,11 +4,14 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <thread>
 #include <string>
 #include <vector>
 
 using std::string;
 
+// unsigned int threadCount = std::thread::hardware_concurrency();
+// #define THREAD_COUNT threadCount
 #define WINDOW_RESOLUTION_X 640
 #define WINDOW_RESOLUTION_Y 400
 #define WINDOW_PIXEL_COUNT WINDOW_RESOLUTION_X * WINDOW_RESOLUTION_Y

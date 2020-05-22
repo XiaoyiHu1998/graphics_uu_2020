@@ -2,10 +2,10 @@
 #include "math.h"
 #include <chrono>
 
-Light_2D::Light_2D(const sf::Vector2f & position, const sf::Vector3f & lightColor):
+Light_2D::Light_2D(const sf::Vector2f & position, const sf::Vector3f & lightColor, float lightIntensity):
     position{position},
     lightColor{lightColor},
-    spinRadius{10}
+    lightIntensity{lightIntensity}
     {};
 
 const sf::Vector2f Light_2D::getPosition(){
@@ -14,6 +14,10 @@ const sf::Vector2f Light_2D::getPosition(){
 
 const sf::Vector3f Light_2D::getColor(){
     return lightColor;
+}
+
+float Light_2D::getLightIntensity(){
+    return lightIntensity;
 }
 
 void Light_2D::updatePosition(){

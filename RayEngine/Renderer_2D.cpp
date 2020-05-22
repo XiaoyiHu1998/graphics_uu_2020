@@ -13,7 +13,6 @@ void Renderer_2D::init(){
     renderFrameBuffer.create(WINDOW_RESOLUTION_X, WINDOW_RESOLUTION_Y);
     texture = sf::Texture();
     sprite = sf::Sprite();
-    window.draw(sprite);
 }
 
 void Renderer_2D::renderFrame(){

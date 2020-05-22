@@ -6,9 +6,10 @@
 class Object_2D{
 private:
     sf::Vector2f position;
-    sf::Vector3f color;
 public:
-    Object_2D(){};
+    Object_2D(const sf::Vector2f & position):
+        position{position}
+    {};
 };
 
 
