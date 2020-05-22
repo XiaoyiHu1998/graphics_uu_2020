@@ -12,7 +12,9 @@ private:
     sf::Image renderFrameBuffer;
     sf::Texture texture;
     sf::Sprite sprite;
+
     std::unique_ptr<float[]> colorBuffer;
+    unsigned int threadCount;
 
     sf::Color getRenderBufferColor(int x, int y);
     float getBoundedFloat(float number);

@@ -4,12 +4,15 @@
 #include "masterInclude.hpp"
 
 class Object_2D{
-private:
+protected:
     sf::Vector2f position;
 public:
     Object_2D(const sf::Vector2f & position):
         position{position}
-    {};
+    {}
+    
+    virtual float getRadius(){return 0;}
+    virtual sf::Vector2f getPosition(){return sf::Vector2f();};
 };
 
 

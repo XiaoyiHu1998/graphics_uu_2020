@@ -2,10 +2,11 @@
 
 Renderer_2D::Renderer_2D():
     window{sf::RenderWindow(sf::VideoMode(WINDOW_RESOLUTION_X, WINDOW_RESOLUTION_Y), "RayEngine")},
-    rayCaster{RayCaster_2D()},
+    rayCaster{RayCaster_2D(threadCount)},
     objectStorage{ObjectStorage_2D()}
     {
         objectStorage.init();
+        threadCount = std::thread::hardware_concurrency();
     }
 
 void Renderer_2D::init(){

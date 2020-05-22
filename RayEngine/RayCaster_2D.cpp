@@ -1,7 +1,10 @@
 #include "RayCaster_2D.hpp"
 
-RayCaster_2D::RayCaster_2D()
-{}
+RayCaster_2D::RayCaster_2D(unsigned int threadCount):
+    threadCount{threadCount}
+{
+    std::cout << threadCount << std::endl;
+}
 
 std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<Object_2D> & objects){
 
@@ -55,5 +58,5 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
 }
 
 float RayCaster_2D::lightAttenuation(float distance){
-    return 1 / (distance) ; 
+    return 1 / (distance * distance) ; 
 }

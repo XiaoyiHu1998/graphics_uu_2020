@@ -7,8 +7,9 @@
 
 class RayCaster_2D{
 private:
+    unsigned int threadCount;
 public:
-    RayCaster_2D();
+    RayCaster_2D(unsigned int threadCount);
     std::unique_ptr<float[]> castRays(std::vector<Light_2D> & lightVector, std::vector<Object_2D> & objects);
     float lightAttenuation(float distance);
 };

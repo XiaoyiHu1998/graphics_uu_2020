@@ -17,11 +17,14 @@ public:
     Circle_2D(const sf::Vector2f & position, float radius):
     Object_2D{position},
     radius{radius}
-    {
+    {}
+
+    float getRadius() override {
+        return radius;
     }
 
-    float getRadius(){
-        return radius;
+    sf::Vector2f getPosition() override {
+        return position;
     }
 };
 
