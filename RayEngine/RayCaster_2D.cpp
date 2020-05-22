@@ -68,5 +68,5 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
 }
 
 float RayCaster_2D::lightAttenuation(float distance){
-    return 1 / (distance) * 2; 
+    return 1 / (distance * distance) * 100; 
 }

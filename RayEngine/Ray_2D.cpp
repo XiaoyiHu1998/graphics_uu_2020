@@ -22,7 +22,7 @@ bool Ray_2D::intersects(std::shared_ptr<Circle_2D> object){
         return false;
     }
     else{
-        return ((-1 * B + fastSqrt(Discriminant)) / 2 * A) >= 0 && ((-1 * B - fastSqrt(Discriminant)) / 2 * A) >= 0;
+        return ((-1 * B + fastSqrt(Discriminant)) / 2 * A) >= 0 || ((-1 * B - fastSqrt(Discriminant)) / 2 * A) >= 0;
     }
 }
 
@@ -41,8 +41,6 @@ float Ray_2D::getDistanceToLight(){
 }
 
 float Ray_2D::calculateLength(const sf::Vector2f & vector){
-    // std::cout << fastSqrt(vector.x * vector.x + vector.y * vector.y) << "," << sqrt(vector.x * vector.x + vector.y * vector.y) << std::endl;
-    // return fastSqrt(vector.x * vector.x + vector.y * vector.y);
     return fastSqrt(vector.x * vector.x + vector.y * vector.y);
 }
 
