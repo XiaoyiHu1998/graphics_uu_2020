@@ -11,12 +11,12 @@ private:
     float distanceToLight;
 
     float calculateLength(const sf::Vector2f & vector);
+    float fastSqrt(float number);
 public:
     Ray_2D();
     bool intersects(std::shared_ptr<Circle_2D> object);
     void setPosition(const sf::Vector2i & position);
-    void setNormalizedDirection(const sf::Vector2f & lightPosition);
-    void setDistanceToLight(const sf::Vector2f & lightPosition);
+    void setNormalizedDirectionAndDistance(const sf::Vector2f & lightPosition);
     float getDistanceToLight();
 };
 

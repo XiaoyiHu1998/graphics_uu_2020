@@ -8,20 +8,28 @@ Ray_2D::Ray_2D():
 {}
 
 bool Ray_2D::intersects(std::shared_ptr<Circle_2D> object){
-    int s = originPosition.x - object->getPosition().x;
-    int t = originPosition.y - object->getPosition().y;
-    int circleRadius = object->getRadius();
+    // int adjustedOriginX = originPosition.x + normalizedDirection.x * 0.001;
+    // int adjustedOriginY = originPosition.y + normalizedDirection.y * 0.001;
 
-    int A = (normalizedDirection.x * normalizedDirection.x) + (normalizedDirection.y * normalizedDirection.y);
-    int B = (2 * s * normalizedDirection.x) + (2 * t * normalizedDirection.y);
-    int C = (s * s) + (t * t) - (circleRadius * circleRadius);
+    // int adjustedEndX = object->getPosition().x - normalizedDirection.x * 0.001;
+    // int adjustedEndY = object->getPosition().x - normalizedDirection.y * 0.001;
 
-    int Discriminant = (B * B) - (4 * A * C);
+    float s = originPosition.x - object->getPosition().x;
+    float t = originPosition.y - object->getPosition().y;
+    float circleRadius = object->getRadius();
+
+    float A = (normalizedDirection.x * normalizedDirection.x) + (normalizedDirection.y * normalizedDirection.y);
+    float B = (2 * s * normalizedDirection.x) + (2 * t * normalizedDirection.y);
+    float C = (s * s) + (t * t) - (circleRadius * circleRadius);
+
+    float Discriminant = (B * B) - (4 * A * C);
     if(Discriminant < 0){
         return false;
     }
     else{
-        return ((-1 * B + sqrt(Discriminant)) / 2 * A) <= distanceToLight;
+        bool firstResult = ((-1 * B + fastSqrt(Discriminant)) / 2 * A) <= distanceToLight;
+        bool secondResult = ((-1 * B - fastSqrt(Discriminant)) / 2 * A) <= distanceToLight;
+        return firstResult || secondResult;
     }
 }
 
@@ -29,15 +37,10 @@ void Ray_2D::setPosition(const sf::Vector2i & position){
     originPosition = sf::Vector2f(position.x, position.y);
 }
 
-void Ray_2D::setNormalizedDirection(const sf::Vector2f & lightPosition){
+void Ray_2D::setNormalizedDirectionAndDistance(const sf::Vector2f & lightPosition){
     sf::Vector2f direction = lightPosition - originPosition;
-    float directionLength = calculateLength(direction);
-    normalizedDirection = sf::Vector2f(direction.x / directionLength, direction.y / directionLength);
-}
-
-void Ray_2D::setDistanceToLight(const sf::Vector2f & lightPosition){
-    sf::Vector2f originToLightVector = lightPosition - originPosition;
-    distanceToLight = calculateLength(originToLightVector);
+    distanceToLight = calculateLength(direction);
+    normalizedDirection = sf::Vector2f(direction.x / distanceToLight, direction.y / distanceToLight);
 }
 
 float Ray_2D::getDistanceToLight(){
@@ -46,5 +49,22 @@ float Ray_2D::getDistanceToLight(){
 
 
 float Ray_2D::calculateLength(const sf::Vector2f & vector){
+    // std::cout << fastSqrt(vector.x * vector.x + vector.y * vector.y) << "," << sqrt(vector.x * vector.x + vector.y * vector.y) << std::endl;
+    // return fastSqrt(vector.x * vector.x + vector.y * vector.y);
     return sqrt(vector.x * vector.x + vector.y * vector.y);
+}
+
+
+float Ray_2D::fastSqrt(float number){
+    const float threehalfs = 1.5f;
+
+    float x2 = number * 0.5f;
+    float y  = number;
+    long i  = * ( long * ) &y;
+    i  = 0x5f3759df - ( i >> 1 );
+    y  = * ( float * ) &i;
+    y  = y * ( threehalfs - ( x2 * y * y ) );
+    y  = y * ( threehalfs - ( x2 * y * y ) );
+
+	return 1 / y;
 }

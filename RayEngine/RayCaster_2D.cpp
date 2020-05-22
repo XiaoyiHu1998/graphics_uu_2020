@@ -27,8 +27,7 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
                 lightPosition = light.getPosition();
                 
                 ray.setPosition(sf::Vector2i(x,y));
-                ray.setNormalizedDirection(lightPosition);
-                ray.setDistanceToLight(lightPosition);
+                ray.setNormalizedDirectionAndDistance(lightPosition);
 
                 for(std::shared_ptr<Circle_2D> object : objects){
                     occluded = ray.intersects(object); 
