@@ -19,8 +19,8 @@
                 "-g3",
                 "-o",
                 "main.exe",
-                "-std=c++17"
-                // "-Og"
+                "-std=c++17",
+                "-Og"
             ],
             "options": {
                 "cwd": "${workspaceFolder}/RayEngine"

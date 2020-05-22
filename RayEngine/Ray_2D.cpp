@@ -9,20 +9,20 @@ Ray_2D::Ray_2D():
 
 bool Ray_2D::intersects(std::shared_ptr<Circle_2D> object){
 
-    double s = originPosition.x - object->getPosition().x;
-    double t = originPosition.y - object->getPosition().y;
+    double xDistance = originPosition.x - object->getPosition().x;
+    double yDistance = originPosition.y - object->getPosition().y;
     double circleRadius = object->getRadius();
 
     double A = (normalizedDirection.x * normalizedDirection.x) + (normalizedDirection.y * normalizedDirection.y);
-    double B = (2 * s * normalizedDirection.x) + (2 * t * normalizedDirection.y);
-    double C = (s * s) + (t * t) - (circleRadius * circleRadius);
+    double B = (2 * xDistance * normalizedDirection.x) + (2 * yDistance * normalizedDirection.y);
+    double C = (xDistance * xDistance) + (yDistance * yDistance) - (circleRadius * circleRadius);
 
     double Discriminant = (B * B) - (4 * A * C);
     if(Discriminant < 0){
         return false;
     }
     else{
-        return ((-1 * B + fastSqrt(Discriminant)) / 2 * A) >= 0 || ((-1 * B - fastSqrt(Discriminant)) / 2 * A) >= 0;
+        return ((-1 * B + fastSqrt(Discriminant)) / 2 * A) > 0 || ((-1 * B - fastSqrt(Discriminant)) / 2 * A) > 0;
     }
 }
 
