@@ -22,7 +22,7 @@ bool Ray_2D::intersects(std::shared_ptr<Circle_2D> object){
         return false;
     }
     else{
-        return ((-1 * B + fastSqrt(Discriminant)) / 2 * A) <= distanceToLight;
+        return ((-1 * B + fastSqrt(Discriminant)) / 2 * A) >= 0 && ((-1 * B - fastSqrt(Discriminant)) / 2 * A) >= 0;
     }
 }
 
