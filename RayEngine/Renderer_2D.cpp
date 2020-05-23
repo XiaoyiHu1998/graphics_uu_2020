@@ -23,7 +23,10 @@ void Renderer_2D::renderFrame(){
     for(Light_2D &light : objectStorage.getLightVector()){
         light.updatePosition();
         light.updateColor();
-    } 
+    }
+    for(std::shared_ptr<Circle_2D> &circle : objectStorage.getobjects()){
+        circle->updatePosition();
+    }
 
     for(uint y = 0; y < WINDOW_RESOLUTION_Y; y++){
         for(uint x = 0; x < WINDOW_RESOLUTION_X; x++){

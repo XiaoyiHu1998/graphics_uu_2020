@@ -34,9 +34,6 @@ bool Ray_2D::intersects(std::shared_ptr<Circle_2D> object, Light_2D light){
         float intersection1 = ((-1 * B + fastSqrt(Discriminant)) / 2 * A);
         float intersection2 = ((-1 * B - fastSqrt(Discriminant)) / 2 * A);
 
-        // sf::Vector2f intersectionPoint1 = originPosition + intersection1 * normalizedDirection;
-        // sf::Vector2f intersectionPoint2 = originPosition + intersection1 * normalizedDirection;
-
         if(distanceToLight < intersection1 && distanceToLight < intersection2){
             return false;
         }
