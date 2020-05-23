@@ -23,22 +23,13 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
             heapBuffer.get()[pixelIndex + 3] = 1;
 
             for(Light_2D & light : lightVector){
-                
+                occluded = false;
                 ray.setPosition(sf::Vector2i(x,y));
                 ray.setNormalizedDirectionAndDistance(light.getPosition());
 
                 for(std::shared_ptr<Circle_2D> object : objects){
-                    occluded = ray.intersects(object); 
-                    float radius = object->getRadius();
-                    // if(x < object->getPosition().x + radius && x > object->getPosition().x - radius){
-                    //     if(y < object->getPosition().y + radius && y > object->getPosition().y - radius){
-                    //         heapBuffer.get()[pixelIndex + 0] = 1.0f;
-                    //         heapBuffer.get()[pixelIndex + 1] = 1.0f;
-                    //         heapBuffer.get()[pixelIndex + 2] = 1.0f;
-                    //         heapBuffer.get()[pixelIndex + 3] = 1.0f;
-                    //     }
-                    // }
-                    if(occluded){
+                    if(ray.intersects(object, light)){
+                        occluded = true;
                         break;
                     }
                 }

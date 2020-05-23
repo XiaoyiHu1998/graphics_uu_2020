@@ -14,7 +14,7 @@ private:
     float fastSqrt(float number);
 public:
     Ray_2D();
-    bool intersects(std::shared_ptr<Circle_2D> object);
+    bool intersects(std::shared_ptr<Circle_2D> object, Light_2D light);
     void setPosition(const sf::Vector2i & position);
     void setNormalizedDirectionAndDistance(const sf::Vector2f & lightPosition);
     float getDistanceToLight();

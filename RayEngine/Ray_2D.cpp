@@ -7,11 +7,19 @@ Ray_2D::Ray_2D():
     distanceToLight{0}
 {}
 
-bool Ray_2D::intersects(std::shared_ptr<Circle_2D> object){
+bool Ray_2D::intersects(std::shared_ptr<Circle_2D> object, Light_2D light){
+    sf::Vector2f objectPosition = sf::Vector2f(object->getPosition().x, object->getPosition().y);
+    sf::Vector2f vectorToObject = objectPosition - originPosition;
+    float distanceToObject = calculateLength(vectorToObject);
+    float objectRadius = object->getRadius();
 
-    double xDistance = originPosition.x - object->getPosition().x;
-    double yDistance = originPosition.y - object->getPosition().y;
-    double circleRadius = object->getRadius();
+    if(distanceToObject <= objectRadius || calculateLength(objectPosition - light.getPosition()) < objectRadius){
+        return true;
+    }
+
+    double xDistance = originPosition.x - objectPosition.x;
+    double yDistance = originPosition.y - objectPosition.y;
+    double circleRadius = objectRadius;
 
     double A = (normalizedDirection.x * normalizedDirection.x) + (normalizedDirection.y * normalizedDirection.y);
     double B = (2 * xDistance * normalizedDirection.x) + (2 * yDistance * normalizedDirection.y);
@@ -22,7 +30,16 @@ bool Ray_2D::intersects(std::shared_ptr<Circle_2D> object){
         return false;
     }
     else{
-        return ((-1 * B + fastSqrt(Discriminant)) / 2 * A) > 0 || ((-1 * B - fastSqrt(Discriminant)) / 2 * A) > 0;
+        float intersection1 = ((-1 * B + fastSqrt(Discriminant)) / 2 * A);
+        float intersection2 = ((-1 * B - fastSqrt(Discriminant)) / 2 * A);
+
+        sf::Vector2f intersectionPoint1 = originPosition + intersection1 * normalizedDirection;
+        sf::Vector2f intersectionPoint2 = originPosition + intersection1 * normalizedDirection;
+
+        if(distanceToLight < distanceToObject ){
+            return false;
+        }
+        return intersection1 > 0 && distanceToLight < intersection1 && distanceToLight < intersection2;
     }
 }
 
