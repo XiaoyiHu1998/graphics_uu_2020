@@ -22,35 +22,35 @@ float Light_2D::getLightIntensity(){
 
 void Light_2D::updatePosition(){
     
-    if(position.x < 100){
-        position.x = 600;
+    if(position.x > 900){
+        position.x = -300;
     }
     else{
-        position.x -= 1;
+        position.x += 4;
     }
 
 }
 
 void Light_2D::updateColor(){
     if(lightColor.z > 1){
-        lightColor.x = 0;
+        lightColor.x = 0.9;
     }
     else{
-        lightColor.x += 0.1;
+        lightColor.x += 0.0003;
     }
 
     if(lightColor.y > 1){
-        lightColor.y = 0;
+        lightColor.y = 0.5;
     }
     else{
-        lightColor.y += 0.2;
+        lightColor.y += 0.007;
     }
 
 
     if(lightColor.z > 1){
-        lightColor.z = 0;
+        lightColor.z = 0.8;
     }
     else{
-        lightColor.z += 0.05;
+        lightColor.z += 0.005;
     }
 }

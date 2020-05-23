@@ -10,6 +10,7 @@ Ray_2D::Ray_2D():
 bool Ray_2D::intersects(std::shared_ptr<Circle_2D> object, Light_2D light){
     sf::Vector2f objectPosition = sf::Vector2f(object->getPosition().x, object->getPosition().y);
     sf::Vector2f vectorToObject = objectPosition - originPosition;
+    sf::Vector2f vectorToLight = light.getPosition() - originPosition;
     float distanceToObject = calculateLength(vectorToObject);
     float objectRadius = object->getRadius();
 
@@ -36,10 +37,10 @@ bool Ray_2D::intersects(std::shared_ptr<Circle_2D> object, Light_2D light){
         sf::Vector2f intersectionPoint1 = originPosition + intersection1 * normalizedDirection;
         sf::Vector2f intersectionPoint2 = originPosition + intersection1 * normalizedDirection;
 
-        if(distanceToLight < distanceToObject ){
+        if(distanceToLight < intersection1 && distanceToLight < intersection2){
             return false;
         }
-        return intersection1 > 0 && distanceToLight < intersection1 && distanceToLight < intersection2;
+        return intersection2 > 0;
     }
 }
 

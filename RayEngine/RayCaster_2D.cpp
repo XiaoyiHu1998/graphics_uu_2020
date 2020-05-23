@@ -47,17 +47,10 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
             }
         }
     }
-    
-    for(Light_2D &light : lightVector){
-        for(int i = 0 ; i < 1000; i++){
-            light.updatePosition();
-            light.updateColor();
-        }
-    } 
 
     return heapBuffer;
 }
 
 float RayCaster_2D::lightAttenuation(float distance){
-    return 1 / (distance * distance) * 100; 
+    return 1 / (distance) * 15; 
 }

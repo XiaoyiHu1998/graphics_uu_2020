@@ -20,6 +20,11 @@ void Renderer_2D::renderFrame(){
 
     colorBuffer = rayCaster.castRays(objectStorage.getLightVector(), objectStorage.getobjects());
     
+    for(Light_2D &light : objectStorage.getLightVector()){
+        light.updatePosition();
+        light.updateColor();
+    } 
+
     for(uint y = 0; y < WINDOW_RESOLUTION_Y; y++){
         for(uint x = 0; x < WINDOW_RESOLUTION_X; x++){
             int currentCoord = x + y * WINDOW_RESOLUTION_X;
