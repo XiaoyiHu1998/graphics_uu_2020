@@ -15,7 +15,7 @@ void ObjectStorage_2D::init(){
             Light_2D(sf::Vector2f(0, 375), sf::Vector3f(0.2, 0.4, 0.7), 5),
             Light_2D(sf::Vector2f(200, 250), sf::Vector3f(0.7, 0.4, 0.3), 5),
             Light_2D(sf::Vector2f(200, 150), sf::Vector3f(0.1, 0.2, 0.1), 5),
-            Light_2D(sf::Vector2f(0, 50), sf::Vector3f(0.2, 0.5, 0.4), 5)
+            // Light_2D(sf::Vector2f(0, 50), sf::Vector3f(0.2, 0.5, 0.4), 5)
     };
 
     objects = std::vector<std::shared_ptr<Circle_2D>>{

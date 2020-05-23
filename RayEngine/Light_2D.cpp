@@ -22,11 +22,11 @@ float Light_2D::getLightIntensity(){
 
 void Light_2D::updatePosition(){
     
-    if(position.x > 900){
-        position.x = -300;
+    if(position.x > 820){
+        position.x = -280;
     }
     else{
-        position.x += 4;
+        position.x += 6;
     }
 
 }
