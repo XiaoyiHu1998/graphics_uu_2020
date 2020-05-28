@@ -6,21 +6,32 @@ RayCaster_2D::RayCaster_2D(unsigned int threadCount):
     std::cout << threadCount << std::endl;
 }
 
-std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<std::shared_ptr<Circle_2D>> & objects){
+void RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<std::shared_ptr<Circle_2D>> & objects, std::shared_ptr<float[]> colorBuffer, int threadNumber){
+    uint_fast64_t rowsToRender = WINDOW_RESOLUTION_Y / threadCount;
+    uint_fast64_t startRow = rowsToRender * threadNumber;
+    uint_fast64_t endRow;
+    
+    if (threadNumber == threadCount - 1) {
+        endRow = WINDOW_RESOLUTION_Y;
+    }
+    else {
+        endRow = startRow + rowsToRender;
+    }
 
-    std::unique_ptr<float[]> heapBuffer = std::make_unique<float[]>(COLOR_BUFFER_SIZE);
+    std::vector<float> tempBuffer;
+    tempBuffer.reserve((endRow - startRow) * WINDOW_RESOLUTION_X * 4);
+
     Ray_2D ray = Ray_2D();
     bool occluded = false;
 
-    for(unsigned int y = 0; y < WINDOW_RESOLUTION_Y; y++){
-        
+    uint_fast64_t pixelIndex = 0;
+    for(unsigned int y = startRow; y < endRow; y++){
         for(unsigned int x = 0; x < WINDOW_RESOLUTION_X; x++){
-            unsigned int pixelIndex = (x + y * WINDOW_RESOLUTION_X) * 4;
 
-            heapBuffer.get()[pixelIndex + 0] = 0;
-            heapBuffer.get()[pixelIndex + 1] = 0;
-            heapBuffer.get()[pixelIndex + 2] = 0;
-            heapBuffer.get()[pixelIndex + 3] = 1;
+            tempBuffer[pixelIndex + 0] = 0;
+            tempBuffer[pixelIndex + 1] = 0;
+            tempBuffer[pixelIndex + 2] = 0;
+            tempBuffer[pixelIndex + 3] = 1;
 
             for(Light_2D & light : lightVector){
                 occluded = false;
@@ -39,16 +50,22 @@ std::unique_ptr<float[]> RayCaster_2D::castRays(std::vector<Light_2D> & lightVec
                     float attenuationValue = lightAttenuation(ray.getDistanceToLight());
                     float intensity = light.getLightIntensity();
 
-                    heapBuffer.get()[pixelIndex + 0] += lightColorVec3.x * attenuationValue * intensity;
-                    heapBuffer.get()[pixelIndex + 1] += lightColorVec3.y * attenuationValue * intensity;
-                    heapBuffer.get()[pixelIndex + 2] += lightColorVec3.z * attenuationValue * intensity;
-                    heapBuffer.get()[pixelIndex + 3] = 1;
+                    tempBuffer[pixelIndex + 0] += lightColorVec3.x * attenuationValue * intensity;
+                    tempBuffer[pixelIndex + 1] += lightColorVec3.y * attenuationValue * intensity;
+                    tempBuffer[pixelIndex + 2] += lightColorVec3.z * attenuationValue * intensity;
+                    tempBuffer[pixelIndex + 3] = 1;
                 }
             }
         }
+        pixelIndex++;
     }
 
-    return heapBuffer;
+    colorBufferMutex.lock();
+    uint_fast64_t startIndex = startRow * WINDOW_RESOLUTION_X * 4;
+    for (int i = startIndex; i < endRow; i++) {
+        colorBuffer.get()[i] = tempBuffer[i - startIndex];
+    }
+    colorBufferMutex.unlock();
 }
 
 float RayCaster_2D::lightAttenuation(float distance){

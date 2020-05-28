@@ -1,8 +1,7 @@
 #include "RayEngine_2D.hpp"
 
 RayEngine_2D::RayEngine_2D(sf::RenderWindow& window):
-    // world{ObjectStorage_2D()},
-    renderer{Renderer_2D(window)},
+    renderer{window},
     drawFrame(true)
 {}
 

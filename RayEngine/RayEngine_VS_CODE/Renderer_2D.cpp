@@ -1,12 +1,13 @@
 #include "Renderer_2D.hpp"
 
-Renderer_2D::Renderer_2D(sf::RenderWindow& window):
-    window{window},
-    rayCaster{RayCaster_2D(threadCount)},
-    objectStorage{ObjectStorage_2D()}
+Renderer_2D::Renderer_2D(sf::RenderWindow& window) :
+    window{ window },
+    rayCaster{threadCount},
+    objectStorage{ ObjectStorage_2D() },
+    colorBuffer{std::make_shared<float[]>(COLOR_BUFFER_SIZE)}
     {
         objectStorage.init();
-        threadCount = std::thread::hardware_concurrency();
+        threadCount = std::thread::hardware_concurrency() - 2;
     }
 
 void Renderer_2D::init(){
@@ -18,7 +19,24 @@ void Renderer_2D::init(){
 
 void Renderer_2D::renderFrame(){
 
-    colorBuffer = rayCaster.castRays(objectStorage.getLightVector(), objectStorage.getobjects());
+    std::vector<std::thread> renderThreads;
+    renderThreads.reserve(threadCount);
+
+    for (int i = 0; i < threadCount; i++) {
+        renderThreads.push_back(
+            std::thread(
+                &RayCaster_2D::castRays, 
+                &rayCaster, 
+                std::ref(objectStorage.getLightVector()), 
+                std::ref(objectStorage.getobjects()), 
+                colorBuffer,
+                i
+            )
+        );
+    }
+    for (int i = 0; i < threadCount; i++) {
+        renderThreads[i].join();
+    }
     
     for(Light_2D &light : objectStorage.getLightVector()){
         light.updatePosition();

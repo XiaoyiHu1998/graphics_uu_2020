@@ -8,9 +8,10 @@
 class RayCaster_2D{
 private:
     unsigned int threadCount;
+    std::mutex colorBufferMutex;
 public:
     RayCaster_2D(unsigned int threadCount);
-    std::unique_ptr<float[]> castRays(std::vector<Light_2D> & lightVector, std::vector<std::shared_ptr<Circle_2D>> & objects);
+    void castRays(std::vector<Light_2D> & lightVector, std::vector<std::shared_ptr<Circle_2D>> & objects, std::shared_ptr<float[]> colorBuffer, int threadNumber);
     float lightAttenuation(float distance);
 };
 

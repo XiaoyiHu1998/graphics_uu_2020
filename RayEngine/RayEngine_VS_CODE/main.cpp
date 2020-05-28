@@ -3,6 +3,7 @@
 
 int main(){
     std::cout << "running" << std::endl;
+    std::cout << std::thread::hardware_concurrency() << std::endl;
     sf::RenderWindow window{ sf::VideoMode(WINDOW_RESOLUTION_X, WINDOW_RESOLUTION_Y), "RayEngine" };
     RayEngine_2D rayEngine(window);
     rayEngine.init();

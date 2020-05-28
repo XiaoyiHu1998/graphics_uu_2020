@@ -5,6 +5,7 @@
 #include <E:\Git Repos\graphics_uu_2020\SFML\include\SFML/Graphics.hpp>
 #include <memory>
 #include <thread>
+#include <mutex>
 #include <string>
 #include <vector>
 #include <stdint.h>

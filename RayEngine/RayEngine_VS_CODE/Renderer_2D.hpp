@@ -13,7 +13,7 @@ private:
     sf::Texture texture;
     sf::Sprite sprite;
 
-    std::unique_ptr<float[]> colorBuffer;
+    std::shared_ptr<float[]> colorBuffer;
     unsigned int threadCount;
 
     sf::Color getRenderBufferColor(int x, int y);
