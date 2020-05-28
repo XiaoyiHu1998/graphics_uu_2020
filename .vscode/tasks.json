@@ -22,7 +22,7 @@
                 "-Og"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/RayEngine"
+                "cwd": "${workspaceFolder}/RayEngine/RayEngine_VS_CODE"
             }
         }
     ],
