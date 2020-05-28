@@ -16,7 +16,7 @@ void ObjectStorage_2D::init(){
     float full360 = 2 * 3.14;
 
     lightVector = {
-             Light_2D(sf::Vector2f(400, 375), sf::Vector3f(0.2, 0.4, 0.7), 5),
+            Light_2D(sf::Vector2f(400, 375), sf::Vector3f(0.2, 0.4, 0.7), 5),
             Light_2D(sf::Vector2f(midx, midy), sf::Vector3f(0.7, 0.4, 0.3), 5, false),
             Light_2D(sf::Vector2f(-50, 150), sf::Vector3f(0.1, 0.2, 0.1), 5),
             // Light_2D(sf::Vector2f(0, 50), sf::Vector3f(0.2, 0.5, 0.4), 5)
