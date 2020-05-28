@@ -37,7 +37,7 @@ public:
     }
 
     void updatePosition() override{
-        angle += 0.5;
+        angle += 0.05;
         spinPosition.x = position.x + spinRadius * cos(angle);
         spinPosition.y = position.y + spinRadius * sin(angle);
     }

@@ -2,11 +2,12 @@
 #include "math.h"
 #include <chrono>
 
-Light_2D::Light_2D(const sf::Vector2f & position, const sf::Vector3f & lightColor, float lightIntensity):
+Light_2D::Light_2D(const sf::Vector2f& position, const sf::Vector3f& lightColor, float intensity, bool dynamic):
     position{position},
     lightColor{lightColor},
-    lightIntensity{lightIntensity}
-    {};
+    lightIntensity{intensity},
+    dynamic{dynamic}
+{};
 
 const sf::Vector2f Light_2D::getPosition(){
     return position;
@@ -21,6 +22,9 @@ float Light_2D::getLightIntensity(){
 }
 
 void Light_2D::updatePosition(){
+    if (!dynamic) {
+        return;
+    }
     
     if(position.x > 820){
         position.x = -280;
