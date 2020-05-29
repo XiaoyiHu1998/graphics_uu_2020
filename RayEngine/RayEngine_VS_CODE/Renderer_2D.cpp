@@ -9,9 +9,9 @@ Renderer_2D::Renderer_2D(sf::RenderWindow& window) :
     rayCaster{THREADCOUNT},
     objectStorage{ ObjectStorage_2D() },
     renderThreads{std::vector<std::thread>()},
-    render{std::vector<bool>()}
+    render{std::vector<bool>()},
+    colorBuffer{ std::vector<float>() }
     {
-        colorBuffer = std::vector<float>();
         colorBuffer.reserve(COLOR_BUFFER_SIZE);
         colorBuffer.assign(colorBuffer.capacity(), 0.0f);
         objectStorage.init();
@@ -23,6 +23,10 @@ void Renderer_2D::init(){
     texture = sf::Texture();
     sprite = sf::Sprite();
 
+    renderThreads.reserve(threadCount);
+    render.reserve(threadCount);
+    renderThreads.clear();
+    render.assign(threadCount, false);
 
     for (int i = 0; i < threadCount; i++) {
         renderThreads.push_back(
@@ -38,23 +42,21 @@ void Renderer_2D::init(){
                 std::ref(bufferMutex)
             )
         );
-        render.push_back(false);
     }
 }
 
 void Renderer_2D::renderFrame(){
     renderMutex.lock();
     for (int i = 0; i < render.size(); i++) {
-        render.at(i) = true;
+        render[i] = true;
     }
     renderMutex.unlock();
 
     while (true) {
-        Sleep(5);
         renderMutex.lock();
         bool frameRendered = true;
         for (int i = 0; i < render.size(); i++) {
-            if (render.at(i)) {
+            if (render[i]) {
                 frameRendered = false;
             }
         }
@@ -106,7 +108,7 @@ void Renderer_2D::renderFrame(){
         circle->updatePosition();
     }
 
-    std::lock_guard<std::mutex> colorBuffer(bufferMutex);
+    std::lock_guard<std::mutex> colorBufferGuard(bufferMutex);
     for(unsigned int y = 0; y < WINDOW_RESOLUTION_Y; y++) {
         for (unsigned int x = 0; x < WINDOW_RESOLUTION_X; x++){
             int currentCoord = x + y * WINDOW_RESOLUTION_X;

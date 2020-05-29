@@ -65,15 +65,13 @@ void RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<std
     for (int i = 0; i < subBuffer.size(); i++) {
         colorBuffer.at(startIndex + i) = subBuffer.at(i);
         number = i;
-    } 
-    std::cout << "renderThread: " << threadNumber << startIndex << ", " << startIndex + static_cast<uint_fast64_t>(number) << std::endl;
+    }
 
 }
 
 void RayCaster_2D::castRaysMT(std::vector<Light_2D>& lightVector, std::vector<std::shared_ptr<Circle_2D>>& objects, std::vector<float>& colorBuffer, int threadNumber, std::vector<bool>& render, std::mutex& renderMutex, std::mutex& bufferMutex) {
     while (true)
     {
-        Sleep(1);
         renderMutex.lock();
         if (render[threadNumber]) {
             renderMutex.unlock();
