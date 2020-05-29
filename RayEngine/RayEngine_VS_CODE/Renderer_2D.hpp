@@ -20,14 +20,16 @@ private:
     std::mutex renderMutex;
     std::mutex finishMutex;
     std::mutex bufferMutex;
+    int renderMode;
 
     sf::Color getRenderBufferColor(uint_fast64_t x, uint_fast64_t y);
     float getBoundedfloat(float number);
 public:
     Renderer_2D(sf::RenderWindow& window);
-    void init();
+    void init(int mode);
     void renderFrame();
     void drawFrame();
+    void exit();
 };
 
 

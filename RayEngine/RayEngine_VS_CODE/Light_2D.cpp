@@ -26,11 +26,14 @@ void Light_2D::updatePosition(){
         return;
     }
     
-    if(position.x > 820){
-        position.x = -280;
+    if(position.x > WINDOW_RESOLUTION_X + 75){
+        position.x = -100;
     }
     else{
-        position.x += 6;
+        position.x += 5;;
+        if(position.x > 10){
+            position.x += position.x / 25;
+        }
     }
 
 }

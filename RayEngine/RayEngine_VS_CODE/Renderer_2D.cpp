@@ -15,88 +15,96 @@ Renderer_2D::Renderer_2D(sf::RenderWindow& window) :
         objectStorage.init();
     }
 
-void Renderer_2D::init(){
+void Renderer_2D::init(int mode){
+    renderMode = mode;
     renderFrameBuffer = sf::Image();
     renderFrameBuffer.create(WINDOW_RESOLUTION_X, WINDOW_RESOLUTION_Y);
     texture = sf::Texture();
     sprite = sf::Sprite();
 
-    renderThreads.reserve(threadCount);
-    render.reserve(threadCount);
-    renderThreads.clear();
-    render.assign(threadCount, false);
+    if(mode == 3){
+        renderThreads.reserve(threadCount);
+        render.reserve(threadCount);
+        renderThreads.clear();
+        render.assign(threadCount, false);
 
-    for (int i = 0; i < threadCount; i++) {
-        renderThreads.push_back(
-            std::thread(
-                &RayCaster_2D::castRaysMT,
-                &rayCaster,
-                std::ref(objectStorage.getLightVector()),
-                std::ref(objectStorage.getobjects()),
-                std::ref(colorBuffer),
-                i,
-                std::ref(render),
-                std::ref(renderMutex),
-                std::ref(bufferMutex)
-            )
-        );
+        for (int i = 0; i < threadCount; i++) {
+            renderThreads.push_back(
+                std::thread(
+                    &RayCaster_2D::castRaysMT,
+                    &rayCaster,
+                    std::ref(objectStorage.getLightVector()),
+                    std::ref(objectStorage.getobjects()),
+                    std::ref(colorBuffer),
+                    i,
+                    std::ref(render),
+                    std::ref(renderMutex),
+                    std::ref(bufferMutex)
+                )
+            );
+        }
     }
 }
 
 void Renderer_2D::renderFrame(){
-    renderMutex.lock();
-    for (int i = 0; i < render.size(); i++) {
-        render[i] = true;
-    }
-    renderMutex.unlock();
-
-    while (true) {
-        renderMutex.lock();
-        bool frameRendered = true;
-        for (int i = 0; i < render.size(); i++) {
-            if (render[i]) {
-                frameRendered = false;
-            }
-        }
-        renderMutex.unlock();
-        if (frameRendered) {
-            break;
-        }
-    }
-
-    
-
-    /*std::vector<std::thread> renderThreads;
     renderThreads.reserve(threadCount);
+    switch(renderMode){
+        case 1:
+            for (int i = 0; i < threadCount; i++) {
+                rayCaster.castRays(
+                    objectStorage.getLightVector(),
+                    objectStorage.getobjects(),
+                    colorBuffer,
+                    i,
+                    bufferMutex
+                );
+            }
+        case 2:
+            for (int i = 0; i < threadCount; i++) {
+                renderThreads.push_back(
+                    std::thread(
+                        &RayCaster_2D::castRays,
+                        &rayCaster,
+                        std::ref(objectStorage.getLightVector()),
+                        std::ref(objectStorage.getobjects()),
+                        std::ref(colorBuffer),
+                        i,
+                        std::ref(bufferMutex)
+                    )
+                );
+            }
+            for (std::thread& thread : renderThreads) {
+                if (thread.joinable()) {
+                    thread.join();
+                }
+            }
+            renderThreads.erase(renderThreads.begin(), renderThreads.end());
+            break;
+        case 3:
+            renderMutex.lock();
+            for (int i = 0; i < render.size(); i++) {
+                render[i] = true;
+            }
+            renderMutex.unlock();
 
-    for (int i = 0; i < threadCount; i++) {
-        renderThreads.push_back(
-            std::thread(
-                &RayCaster_2D::castRays,
-                &rayCaster,
-                std::ref(objectStorage.getLightVector()),
-                std::ref(objectStorage.getobjects()),
-                std::ref(colorBuffer),
-                i
-            )
-        );
+            while (true) {
+                renderMutex.lock();
+                bool frameRendered = true;
+                for (int i = 0; i < render.size(); i++) {
+                    if (render[i]) {
+                        frameRendered = false;
+                    }
+                }
+                renderMutex.unlock();
+                if (frameRendered) {
+                    break;
+                }
+            }
+            break;
+        default:
+            std::cout << "invalid renderMode: " << std::endl;
+            break;
     }
-    for (std::thread& thread : renderThreads) {
-        if (thread.joinable()) {
-            thread.join();
-        }
-    }
-    renderThreads.erase(renderThreads.begin(), renderThreads.end());*/
-
-    /*for (int i = 0; i < threadCount; i++) {
-        rayCaster.castRays(
-            objectStorage.getLightVector(),
-            objectStorage.getobjects(),
-            colorBuffer,
-            i,
-            bufferMutex
-        );
-    }*/
 
     for(Light_2D &light : objectStorage.getLightVector()){
         light.updatePosition();
@@ -144,5 +152,12 @@ float Renderer_2D::getBoundedfloat(float number){
     }
     else{
         return 0;
+    }
+}
+
+void Renderer_2D::exit(){
+    rayCaster.exit();
+    for(std::thread & thread : renderThreads){
+        thread.join();
     }
 }

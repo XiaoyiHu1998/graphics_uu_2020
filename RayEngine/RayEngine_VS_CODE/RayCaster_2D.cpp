@@ -2,7 +2,8 @@
 #include "masterInclude.hpp"
 
 RayCaster_2D::RayCaster_2D(unsigned int threadCount):
-    threadCount{threadCount}
+    threadCount{threadCount},
+    keepRunning{true}
 {
     std::cout << threadCount << std::endl;
 }
@@ -70,7 +71,7 @@ void RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<std
 }
 
 void RayCaster_2D::castRaysMT(std::vector<Light_2D>& lightVector, std::vector<std::shared_ptr<Circle_2D>>& objects, std::vector<float>& colorBuffer, int threadNumber, std::vector<bool>& render, std::mutex& renderMutex, std::mutex& bufferMutex) {
-    while (true)
+    while (keepRunning)
     {
         renderMutex.lock();
         if (render[threadNumber]) {
@@ -94,4 +95,8 @@ void RayCaster_2D::castRaysMT(std::vector<Light_2D>& lightVector, std::vector<st
 
 float RayCaster_2D::lightAttenuation(float distance){
     return 1 / (distance) * 5; 
+}
+
+void RayCaster_2D::exit(){
+    keepRunning = false;
 }

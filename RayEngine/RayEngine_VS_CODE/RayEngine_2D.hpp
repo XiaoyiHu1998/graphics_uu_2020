@@ -12,9 +12,10 @@ private:
     bool drawFrame;
 public:
     RayEngine_2D(sf::RenderWindow& window);
-    void init();
+    void init(int renderMode);
     void handleInput();
     void renderLoop();
+    void exit();
 };
 
 

@@ -15,6 +15,7 @@
                 "-lsfml-graphics",
                 "-lsfml-window",
                 "-lsfml-system",
+                "-lpthread",
                 "-g3",
                 "-o",
                 "main.exe",
@@ -22,7 +23,7 @@
                 "-Og"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/RayEngine"
+                "cwd": "${workspaceFolder}/RayEngine/RayEngine_VS_CODE"
             }
         }
     ],
