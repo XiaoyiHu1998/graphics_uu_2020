@@ -13,11 +13,13 @@ private:
     sf::Texture texture;
     sf::Sprite sprite;
 
-    bool render;
-    int finishedThreads;
     std::vector<float> colorBuffer;
     std::vector<std::thread> renderThreads;
+    std::vector<bool> render;
     unsigned int threadCount;
+    std::mutex renderMutex;
+    std::mutex finishMutex;
+    std::mutex bufferMutex;
 
     sf::Color getRenderBufferColor(uint_fast64_t x, uint_fast64_t y);
     float getBoundedfloat(float number);

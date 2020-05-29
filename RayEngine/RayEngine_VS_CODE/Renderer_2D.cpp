@@ -8,25 +8,9 @@ Renderer_2D::Renderer_2D(sf::RenderWindow& window) :
     threadCount{THREADCOUNT},
     rayCaster{THREADCOUNT},
     objectStorage{ ObjectStorage_2D() },
-    render{true},
-    finishedThreads{0}
+    renderThreads{std::vector<std::thread>()},
+    render{std::vector<bool>()}
     {
-        /*std::vector<std::thread> renderThreads;
-        renderThreads.reserve(threadCount);
-        for (int i = 0; i < threadCount; i++) {
-            renderThreads.push_back(
-                std::thread(
-                    &RayCaster_2D::castRaysMT,
-                    &rayCaster,
-                    std::ref(objectStorage.getLightVector()),
-                    std::ref(objectStorage.getobjects()),
-                    std::ref(colorBuffer),
-                    i,
-                    render,
-                    finishedThreads
-                )
-            );
-        }*/
         colorBuffer = std::vector<float>();
         colorBuffer.reserve(COLOR_BUFFER_SIZE);
         colorBuffer.assign(colorBuffer.capacity(), 0.0f);
@@ -38,10 +22,51 @@ void Renderer_2D::init(){
     renderFrameBuffer.create(WINDOW_RESOLUTION_X, WINDOW_RESOLUTION_Y);
     texture = sf::Texture();
     sprite = sf::Sprite();
+
+
+    for (int i = 0; i < threadCount; i++) {
+        renderThreads.push_back(
+            std::thread(
+                &RayCaster_2D::castRaysMT,
+                &rayCaster,
+                std::ref(objectStorage.getLightVector()),
+                std::ref(objectStorage.getobjects()),
+                std::ref(colorBuffer),
+                i,
+                std::ref(render),
+                std::ref(renderMutex),
+                std::ref(bufferMutex)
+            )
+        );
+        render.push_back(false);
+    }
 }
 
 void Renderer_2D::renderFrame(){
-    std::vector<std::thread> renderThreads;
+    renderMutex.lock();
+    for (int i = 0; i < render.size(); i++) {
+        render.at(i) = true;
+    }
+    renderMutex.unlock();
+
+    while (true) {
+        Sleep(5);
+        renderMutex.lock();
+        bool frameRendered = true;
+        for (int i = 0; i < render.size(); i++) {
+            if (render.at(i)) {
+                frameRendered = false;
+            }
+        }
+        renderMutex.unlock();
+        if (frameRendered) {
+            break;
+        }
+    }
+
+    
+
+    /*std::vector<std::thread> renderThreads;
     renderThreads.reserve(threadCount);
 
     for (int i = 0; i < threadCount; i++) {
@@ -61,7 +86,7 @@ void Renderer_2D::renderFrame(){
             thread.join();
         }
     }
-    renderThreads.erase(renderThreads.begin(), renderThreads.end());
+    renderThreads.erase(renderThreads.begin(), renderThreads.end());*/
 
     /*for (int i = 0; i < threadCount; i++) {
         rayCaster.castRays(
@@ -81,6 +106,7 @@ void Renderer_2D::renderFrame(){
         circle->updatePosition();
     }
 
+    std::lock_guard<std::mutex> colorBuffer(bufferMutex);
     for(unsigned int y = 0; y < WINDOW_RESOLUTION_Y; y++) {
         for (unsigned int x = 0; x < WINDOW_RESOLUTION_X; x++){
             int currentCoord = x + y * WINDOW_RESOLUTION_X;

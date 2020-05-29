@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include <stdint.h>
+#include "Windows.h"
 
 using std::string;
 

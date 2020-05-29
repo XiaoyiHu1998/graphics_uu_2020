@@ -7,7 +7,7 @@ RayCaster_2D::RayCaster_2D(unsigned int threadCount):
     std::cout << threadCount << std::endl;
 }
 
-void RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<std::shared_ptr<Circle_2D>> & objects, std::vector<float> & colorBuffer, int threadNumber){
+void RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<std::shared_ptr<Circle_2D>> & objects, std::vector<float> & colorBuffer, int threadNumber, std::mutex& bufferMutex){
     uint_fast64_t rowsToRender = WINDOW_RESOLUTION_Y / threadCount;
     uint_fast64_t startRow = rowsToRender * threadNumber;
     uint_fast64_t endRow;
@@ -18,7 +18,6 @@ void RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<std
     else {
         endRow = startRow + rowsToRender;
     }
-
     std::vector<float> subBuffer;
     subBuffer.reserve((endRow - startRow) * WINDOW_RESOLUTION_X * 4);
     subBuffer.assign(subBuffer.capacity(), 0.0f);
@@ -61,29 +60,33 @@ void RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<std
     }
 
     uint_fast64_t startIndex = startRow * WINDOW_RESOLUTION_X * 4;
+    int number;
     std::lock_guard<std::mutex> lock(bufferMutex);
     for (int i = 0; i < subBuffer.size(); i++) {
-        colorBuffer[startIndex + i] = subBuffer[i];
-    }
+        colorBuffer.at(startIndex + i) = subBuffer.at(i);
+        number = i;
+    } 
+    std::cout << "renderThread: " << threadNumber << startIndex << ", " << startIndex + static_cast<uint_fast64_t>(number) << std::endl;
 
 }
 
-void RayCaster_2D::castRaysMT(std::vector<Light_2D>& lightVector, std::vector<std::shared_ptr<Circle_2D>>& objects, std::vector<float>& colorBuffer, int threadNumber, bool & render, int & finishedThreads) {
+void RayCaster_2D::castRaysMT(std::vector<Light_2D>& lightVector, std::vector<std::shared_ptr<Circle_2D>>& objects, std::vector<float>& colorBuffer, int threadNumber, std::vector<bool>& render, std::mutex& renderMutex, std::mutex& bufferMutex) {
     while (true)
     {
+        Sleep(1);
         renderMutex.lock();
-        if (render) {
+        if (render[threadNumber]) {
             renderMutex.unlock();
             castRays(
                 lightVector,
                 objects,
                 colorBuffer,
-                threadNumber
+                threadNumber,
+                bufferMutex
             );
-
-            finishMutex.lock();
-            finishedThreads++;
-            finishMutex.unlock();
+            renderMutex.lock();
+            render[threadNumber] = false;
+            renderMutex.unlock();
         }
         else {
             renderMutex.unlock();
