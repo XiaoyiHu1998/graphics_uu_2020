@@ -1,7 +1,5 @@
 #include "Renderer_2D.hpp"
 #include "masterInclude.hpp"
-#include <execution>
-#include "Windows.h"
 
 Renderer_2D::Renderer_2D(sf::RenderWindow& window) :
     window{ window },

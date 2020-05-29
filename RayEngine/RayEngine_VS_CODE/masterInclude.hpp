@@ -5,14 +5,13 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <algorithm>
-#include <execution>
 #include <thread>
 #include <future>
 #include <mutex>
 #include <string>
 #include <vector>
 #include <stdint.h>
-#include "Windows.h"
+// #include "Windows.h"
 
 using std::string;
 
