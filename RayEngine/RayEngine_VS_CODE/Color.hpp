@@ -3,17 +3,18 @@
 
 #include "masterInclude.hpp"
 
-class Color{
-private:
-    sf::Vector3f colorHDR;
-    sf::Vector3i colorSDR[3];
-public:
-    Color(float ColorHDR[3]);
-    Color(uint8_t ColorSDR[3]);
-    void updateColor(float colorHDR[3]);
-    void updateColor(uint8_t colorSDR[3]);
-    sf::Vector3f getColorHDR();
-    sf::Vector3i getColorSDR();
+struct Color{
+    float r;
+    float g;
+    float b;
+    float a;
+
+    Color(float r, float g, float b):
+        r{r},
+        g{g},
+        b{b},
+        a{1.0f}
+    {}
 };
 
 #endif

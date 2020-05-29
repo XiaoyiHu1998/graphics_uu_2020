@@ -1,13 +1,36 @@
 #include "Renderer_2D.hpp"
+#include "masterInclude.hpp"
+#include <execution>
+#include "Windows.h"
 
 Renderer_2D::Renderer_2D(sf::RenderWindow& window) :
     window{ window },
-    rayCaster{threadCount},
+    threadCount{THREADCOUNT},
+    rayCaster{THREADCOUNT},
     objectStorage{ ObjectStorage_2D() },
-    colorBuffer{std::make_shared<float[]>(COLOR_BUFFER_SIZE)}
+    render{true},
+    finishedThreads{0}
     {
+        /*std::vector<std::thread> renderThreads;
+        renderThreads.reserve(threadCount);
+        for (int i = 0; i < threadCount; i++) {
+            renderThreads.push_back(
+                std::thread(
+                    &RayCaster_2D::castRaysMT,
+                    &rayCaster,
+                    std::ref(objectStorage.getLightVector()),
+                    std::ref(objectStorage.getobjects()),
+                    std::ref(colorBuffer),
+                    i,
+                    render,
+                    finishedThreads
+                )
+            );
+        }*/
+        colorBuffer = std::vector<float>();
+        colorBuffer.reserve(COLOR_BUFFER_SIZE);
+        colorBuffer.assign(colorBuffer.capacity(), 0.0f);
         objectStorage.init();
-        threadCount = std::thread::hardware_concurrency() - 2;
     }
 
 void Renderer_2D::init(){
@@ -18,26 +41,38 @@ void Renderer_2D::init(){
 }
 
 void Renderer_2D::renderFrame(){
-
     std::vector<std::thread> renderThreads;
     renderThreads.reserve(threadCount);
 
     for (int i = 0; i < threadCount; i++) {
         renderThreads.push_back(
             std::thread(
-                &RayCaster_2D::castRays, 
-                &rayCaster, 
-                std::ref(objectStorage.getLightVector()), 
-                std::ref(objectStorage.getobjects()), 
-                colorBuffer,
+                &RayCaster_2D::castRays,
+                &rayCaster,
+                std::ref(objectStorage.getLightVector()),
+                std::ref(objectStorage.getobjects()),
+                std::ref(colorBuffer),
                 i
             )
         );
     }
-    for (int i = 0; i < threadCount; i++) {
-        renderThreads[i].join();
+    for (std::thread& thread : renderThreads) {
+        if (thread.joinable()) {
+            thread.join();
+        }
     }
-    
+    renderThreads.erase(renderThreads.begin(), renderThreads.end());
+
+    /*for (int i = 0; i < threadCount; i++) {
+        rayCaster.castRays(
+            objectStorage.getLightVector(),
+            objectStorage.getobjects(),
+            colorBuffer,
+            i,
+            bufferMutex
+        );
+    }*/
+
     for(Light_2D &light : objectStorage.getLightVector()){
         light.updatePosition();
         light.updateColor();
@@ -49,7 +84,6 @@ void Renderer_2D::renderFrame(){
     for(unsigned int y = 0; y < WINDOW_RESOLUTION_Y; y++) {
         for (unsigned int x = 0; x < WINDOW_RESOLUTION_X; x++){
             int currentCoord = x + y * WINDOW_RESOLUTION_X;
-            sf::Color testColor = sf::Color(currentCoord % 255, currentCoord % 128, currentCoord & 64);
             renderFrameBuffer.setPixel(x, y, getRenderBufferColor(x, y));
         }
     }
@@ -64,8 +98,8 @@ void Renderer_2D::drawFrame(){
     window.display();
 }
 
-sf::Color Renderer_2D::getRenderBufferColor(int x, int y){
-    int index = (x + y * WINDOW_RESOLUTION_X) * 4;
+sf::Color Renderer_2D::getRenderBufferColor(uint_fast64_t x, uint_fast64_t y){
+    uint_fast64_t index = (x + y * WINDOW_RESOLUTION_X) * 4;
 
     sf::Uint8 r = static_cast<sf::Uint8>(getBoundedfloat(colorBuffer[index + 0]) * 255.0f);
     sf::Uint8 g = static_cast<sf::Uint8>(getBoundedfloat(colorBuffer[index + 1]) * 255.0f);
