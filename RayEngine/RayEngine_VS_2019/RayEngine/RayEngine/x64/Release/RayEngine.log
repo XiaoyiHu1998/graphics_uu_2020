@@ -1,8 +1,0 @@
-﻿  RayCaster_2D.cpp
-E:\Git Repos\graphics_uu_2020\RayEngine\RayEngine_VS_CODE\Circle_2D.hpp(40,1): warning C4305: '+=': truncation from 'double' to 'float'
-  Generating code
-  2 of 230 functions ( 0.9%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  RayEngine.vcxproj -> E:\Git Repos\graphics_uu_2020\RayEngine\RayEngine_VS_2019\RayEngine\x64\Release\RayEngine.exe
