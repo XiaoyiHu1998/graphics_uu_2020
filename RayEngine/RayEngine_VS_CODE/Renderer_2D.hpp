@@ -29,7 +29,7 @@ public:
     void init(int mode);
     void renderFrame();
     void drawFrame();
-    void exit();
+    void exitProgram();
 };
 
 

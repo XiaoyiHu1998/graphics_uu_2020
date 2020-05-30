@@ -39,8 +39,8 @@ void Light_2D::updatePosition(){
 }
 
 void Light_2D::updateColor(){
-    if(lightColor.z > 1){
-        lightColor.x = 0.9;
+    if(lightColor.x > 1){
+        lightColor.x = 0.6;
     }
     else{
         lightColor.x += 0.0003;

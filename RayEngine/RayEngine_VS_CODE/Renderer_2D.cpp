@@ -1,5 +1,6 @@
 #include "Renderer_2D.hpp"
 #include "masterInclude.hpp"
+#include "Windows.h"
 
 Renderer_2D::Renderer_2D(sf::RenderWindow& window) :
     window{ window },
@@ -59,6 +60,7 @@ void Renderer_2D::renderFrame(){
                     bufferMutex
                 );
             }
+            break;
         case 2:
             for (int i = 0; i < threadCount; i++) {
                 renderThreads.push_back(
@@ -86,6 +88,7 @@ void Renderer_2D::renderFrame(){
                 render[i] = true;
             }
             renderMutex.unlock();
+            Sleep(16);
 
             while (true) {
                 renderMutex.lock();
@@ -99,10 +102,14 @@ void Renderer_2D::renderFrame(){
                 if (frameRendered) {
                     break;
                 }
+                else {
+                    Sleep(2);
+                }
             }
             break;
         default:
             std::cout << "invalid renderMode: " << std::endl;
+            exit(0);
             break;
     }
 
@@ -155,7 +162,7 @@ float Renderer_2D::getBoundedfloat(float number){
     }
 }
 
-void Renderer_2D::exit(){
+void Renderer_2D::exitProgram(){
     rayCaster.exit();
     for(std::thread & thread : renderThreads){
         thread.join();

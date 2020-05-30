@@ -39,7 +39,7 @@ void RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<std
                 ray.setPosition(sf::Vector2i(x,y));
                 ray.setNormalizedDirectionAndDistance(light.getPosition());
 
-                for(std::shared_ptr<Circle_2D> object : objects){
+                for(std::shared_ptr<Circle_2D>& object : objects){
                     if(ray.intersects(object, light)){
                         occluded = true;
                         break;

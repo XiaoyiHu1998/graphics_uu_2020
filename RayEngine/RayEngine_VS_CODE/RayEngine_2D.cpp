@@ -21,5 +21,5 @@ void RayEngine_2D::renderLoop(){
 }
 
 void RayEngine_2D::exit(){
-    renderer.exit();
+    renderer.exitProgram();
 }

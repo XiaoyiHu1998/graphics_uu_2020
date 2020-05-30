@@ -143,6 +143,7 @@
       <AdditionalIncludeDirectories>E:\Git Repos\graphics_uu_2020\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAsManaged>
       </CompileAsManaged>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
