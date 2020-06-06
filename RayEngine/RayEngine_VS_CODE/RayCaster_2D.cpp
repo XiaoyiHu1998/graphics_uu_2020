@@ -19,9 +19,14 @@ void RayCaster_2D::castRays(std::vector<Light_2D> & lightVector, std::vector<std
     else {
         endRow = startRow + rowsToRender;
     }
+
+    uint_fast64_t subBufferSize = (endRow - startRow) * WINDOW_RESOLUTION_X * 4;
     std::vector<float> subBuffer;
-    subBuffer.reserve((endRow - startRow) * WINDOW_RESOLUTION_X * 4);
-    subBuffer.assign(subBuffer.capacity(), 0.0f);
+    subBuffer.clear();
+    subBuffer.reserve(subBufferSize);
+    for (int i = 0; i < subBufferSize; i++) {
+        subBuffer.emplace_back(0.0f);
+    }
 
     Ray_2D ray = Ray_2D();
     bool occluded = false;

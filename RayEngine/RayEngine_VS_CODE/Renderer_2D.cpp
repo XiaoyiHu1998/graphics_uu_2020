@@ -4,11 +4,11 @@
 
 Renderer_2D::Renderer_2D(sf::RenderWindow& window) :
     window{ window },
-    threadCount{THREADCOUNT},
-    rayCaster{THREADCOUNT},
+    threadCount{ THREADCOUNT },
+    rayCaster{ THREADCOUNT },
     objectStorage{ ObjectStorage_2D() },
-    renderThreads{std::vector<std::thread>()},
-    render{std::vector<bool>()},
+    renderThreads{ std::vector<std::thread>() },
+    render{ std::vector<bool>() },
     colorBuffer{ std::vector<float>() }
     {
         colorBuffer.reserve(COLOR_BUFFER_SIZE);
@@ -23,14 +23,14 @@ void Renderer_2D::init(int mode){
     texture = sf::Texture();
     sprite = sf::Sprite();
 
+    renderThreads.reserve(threadCount);
     if(mode == 3){
-        renderThreads.reserve(threadCount);
         render.reserve(threadCount);
         renderThreads.clear();
         render.assign(threadCount, false);
 
         for (int i = 0; i < threadCount; i++) {
-            renderThreads.push_back(
+            renderThreads.emplace_back(
                 std::thread(
                     &RayCaster_2D::castRaysMT,
                     &rayCaster,
@@ -45,10 +45,30 @@ void Renderer_2D::init(int mode){
             );
         }
     }
+    std::cout << "start loading font" << std::endl;
+    font.loadFromFile("../../../../Font/Roboto-Bold.ttf");
+    std::cout << "done loading font" << std::endl;
+    fontColor = sf::Color::Yellow;
+    frameRateString = "0";
+    frameTimeString = "0";
+
+    frameRateText.setFillColor(fontColor);
+    frameRateText.setPosition(5, 1);
+    frameRateText.setCharacterSize(15);
+    frameRateText.setStyle(sf::Text::Bold);
+    frameRateText.setFont(font);
+    frameRateText.setString(frameRateString);
+
+    frameTimeText.setFillColor(fontColor);
+    frameTimeText.setPosition(5, 15);
+    frameTimeText.setCharacterSize(15);
+    frameTimeText.setStyle(sf::Text::Bold);
+    frameTimeText.setFont(font);
+    frameTimeText.setString(frameTimeString);
 }
 
-void Renderer_2D::renderFrame(){
-    renderThreads.reserve(threadCount);
+void Renderer_2D::renderFrame(Timer& timer){
+    timer.startTimer();
     switch(renderMode){
         case 1:
             for (int i = 0; i < threadCount; i++) {
@@ -63,7 +83,7 @@ void Renderer_2D::renderFrame(){
             break;
         case 2:
             for (int i = 0; i < threadCount; i++) {
-                renderThreads.push_back(
+                renderThreads.emplace_back(
                     std::thread(
                         &RayCaster_2D::castRays,
                         &rayCaster,
@@ -112,6 +132,7 @@ void Renderer_2D::renderFrame(){
             exit(0);
             break;
     }
+    timer.endTimer();
 
     for(Light_2D &light : objectStorage.getLightVector()){
         light.updatePosition();
@@ -130,12 +151,28 @@ void Renderer_2D::renderFrame(){
     }
 }
 
-void Renderer_2D::drawFrame(){
+void Renderer_2D::drawFrame(Timer& timer){
     window.clear(sf::Color::Black);
     texture.loadFromImage(renderFrameBuffer);
     sprite.setTexture(texture);
     sprite.setPosition(sf::Vector2f(0,0));
     window.draw(sprite);
+
+    string frameRateStringRaw = std::to_string(timer.getFrameRate());
+    frameRateStringRaw = frameRateStringRaw.substr(0, 4);
+    frameRateStringRaw.append(" FPS");
+    frameRateString = frameRateStringRaw;
+    frameRateText.setString(frameRateStringRaw);
+
+    /*string frameTimeStringRaw = std::to_string(timer.getFrameTime());
+    frameTimeStringRaw = frameTimeStringRaw.substr(0, 4);
+    frameTimeStringRaw.append(" ms");
+    frameTimeString = frameTimeStringRaw;
+    frameTimeText.setString(frameTimeStringRaw);*/
+
+    window.draw(frameRateText);
+    //window.draw(frameTimeText);
+
     window.display();
 }
 

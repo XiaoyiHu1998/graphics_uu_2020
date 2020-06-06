@@ -2,6 +2,7 @@
 #define RENDERER_2D_HPP
 
 #include "RayCaster_2D.hpp"
+#include "Timer.hpp"
 
 class Renderer_2D{
 private:
@@ -12,6 +13,13 @@ private:
     sf::Image renderFrameBuffer;
     sf::Texture texture;
     sf::Sprite sprite;
+
+    sf::Color fontColor;
+    sf::Font font;
+    sf::Text frameRateText;
+    sf::Text frameTimeText;
+    string frameRateString;
+    string frameTimeString;
 
     std::vector<float> colorBuffer;
     std::vector<std::thread> renderThreads;
@@ -27,8 +35,8 @@ private:
 public:
     Renderer_2D(sf::RenderWindow& window);
     void init(int mode);
-    void renderFrame();
-    void drawFrame();
+    void renderFrame(Timer& timer);
+    void drawFrame(Timer& timer);
     void exitProgram();
 };
 

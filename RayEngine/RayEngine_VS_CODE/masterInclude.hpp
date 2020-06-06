@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <stdint.h>
+#include <math.h>
 // #include "Windows.h"
 
 using std::string;

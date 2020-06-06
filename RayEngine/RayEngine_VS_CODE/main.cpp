@@ -1,6 +1,5 @@
 #include "RayEngine_2D.hpp"
 
-
 int main(){
     std::cout << "select renderMode:" << std::endl;
     std::cout << "singleThreaded: 1" << std::endl;
