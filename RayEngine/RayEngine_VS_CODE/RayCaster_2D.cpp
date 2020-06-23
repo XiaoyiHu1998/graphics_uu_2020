@@ -99,7 +99,7 @@ void RayCaster_2D::castRaysMT(std::vector<Light_2D>& lightVector, std::vector<st
 }
 
 float RayCaster_2D::lightAttenuation(float distance){
-    return 1 / (distance) * 5; 
+    return 1 / (distance) ; 
 }
 
 void RayCaster_2D::exit(){

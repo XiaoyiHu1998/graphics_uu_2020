@@ -1,6 +1,5 @@
 #include "Renderer_2D.hpp"
 #include "masterInclude.hpp"
-#include "Windows.h"
 
 Renderer_2D::Renderer_2D(sf::RenderWindow& window) :
     window{ window },
@@ -46,11 +45,12 @@ void Renderer_2D::init(int mode){
         }
     }
     std::cout << "start loading font" << std::endl;
-    font.loadFromFile("../../../../Font/Roboto-Bold.ttf");
+    font.loadFromFile("Roboto-Bold.ttf");
     std::cout << "done loading font" << std::endl;
     fontColor = sf::Color::Yellow;
     frameRateString = "0";
     frameTimeString = "0";
+    renderModeString = "Mode";
 
     frameRateText.setFillColor(fontColor);
     frameRateText.setPosition(5, 1);
@@ -65,12 +65,20 @@ void Renderer_2D::init(int mode){
     frameTimeText.setStyle(sf::Text::Bold);
     frameTimeText.setFont(font);
     frameTimeText.setString(frameTimeString);
+
+    renderModeText.setFillColor(fontColor);
+    renderModeText.setPosition(85, 1);
+    renderModeText.setCharacterSize(15);
+    renderModeText.setStyle(sf::Text::Bold);
+    renderModeText.setFont(font);
+    renderModeText.setString(renderModeString);
 }
 
 void Renderer_2D::renderFrame(Timer& timer){
     timer.startTimer();
     switch(renderMode){
         case 1:
+            renderModeString = "ST";
             for (int i = 0; i < threadCount; i++) {
                 rayCaster.castRays(
                     objectStorage.getLightVector(),
@@ -82,6 +90,7 @@ void Renderer_2D::renderFrame(Timer& timer){
             }
             break;
         case 2:
+            renderModeString = "MT";
             for (int i = 0; i < threadCount; i++) {
                 renderThreads.emplace_back(
                     std::thread(
@@ -103,12 +112,15 @@ void Renderer_2D::renderFrame(Timer& timer){
             renderThreads.erase(renderThreads.begin(), renderThreads.end());
             break;
         case 3:
+            renderModeString = "MT+TP";
             renderMutex.lock();
             for (int i = 0; i < render.size(); i++) {
                 render[i] = true;
             }
             renderMutex.unlock();
-            Sleep(16);
+            #ifdef _WIN32
+            Sleep(timer.getLastFrameTime() * 0.7);
+            #endif
 
             while (true) {
                 renderMutex.lock();
@@ -122,9 +134,11 @@ void Renderer_2D::renderFrame(Timer& timer){
                 if (frameRendered) {
                     break;
                 }
+                #ifdef _WIN32
                 else {
                     Sleep(2);
                 }
+                #endif
             }
             break;
         default:
@@ -164,14 +178,17 @@ void Renderer_2D::drawFrame(Timer& timer){
     frameRateString = frameRateStringRaw;
     frameRateText.setString(frameRateStringRaw);
 
-    /*string frameTimeStringRaw = std::to_string(timer.getFrameTime());
+    string frameTimeStringRaw = std::to_string(timer.getFrameTime());
     frameTimeStringRaw = frameTimeStringRaw.substr(0, 4);
     frameTimeStringRaw.append(" ms");
     frameTimeString = frameTimeStringRaw;
-    frameTimeText.setString(frameTimeStringRaw);*/
+    frameTimeText.setString(frameTimeStringRaw);
+
+    renderModeText.setString(renderModeString);
 
     window.draw(frameRateText);
-    //window.draw(frameTimeText);
+    window.draw(frameTimeText);
+    window.draw(renderModeText);
 
     window.display();
 }

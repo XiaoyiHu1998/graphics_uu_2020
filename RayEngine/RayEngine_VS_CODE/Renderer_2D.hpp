@@ -18,8 +18,10 @@ private:
     sf::Font font;
     sf::Text frameRateText;
     sf::Text frameTimeText;
+    sf::Text renderModeText;
     string frameRateString;
     string frameTimeString;
+    string renderModeString;
 
     std::vector<float> colorBuffer;
     std::vector<std::thread> renderThreads;

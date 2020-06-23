@@ -12,12 +12,14 @@
 #include <vector>
 #include <stdint.h>
 #include <math.h>
-// #include "Windows.h"
+#ifdef _WIN32
+	#include "Windows.h"
+#endif
 
 using std::string;
 
-#define WINDOW_RESOLUTION_X 500
-#define WINDOW_RESOLUTION_Y 500
+#define WINDOW_RESOLUTION_X 50
+#define WINDOW_RESOLUTION_Y 50
 #define WINDOW_PIXEL_COUNT WINDOW_RESOLUTION_X * WINDOW_RESOLUTION_Y
 #define COLOR_BUFFER_SIZE WINDOW_PIXEL_COUNT * 4
 #define THREADCOUNT  std::thread::hardware_concurrency()

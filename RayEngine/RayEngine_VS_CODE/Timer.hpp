@@ -5,15 +5,17 @@
 
 class Timer{
 private:
-    std::chrono::time_point<std::chrono::system_clock> startTime;
-    std::chrono::time_point<std::chrono::system_clock> endTime;
+    std::chrono::time_point<std::chrono::high_resolution_clock> startTime;
+    std::chrono::time_point<std::chrono::high_resolution_clock> endTime;
     double frameTime;
+    double lastFrameTime;
 public:
     Timer();
     void startTimer();
     void endTimer();
     double getFrameRate();
     double getFrameTime();
+    double getLastFrameTime();
 };
 
 

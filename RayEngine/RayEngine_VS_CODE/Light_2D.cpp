@@ -58,6 +58,6 @@ void Light_2D::updateColor(){
         lightColor.z = 0.8;
     }
     else{
-        lightColor.z += 0.005;
+        lightColor.z += 0.003;
     }
 }
