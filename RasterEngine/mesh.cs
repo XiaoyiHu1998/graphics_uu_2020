@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using INFOGR2019Tmpl8;
 using OpenTK;
@@ -17,12 +18,16 @@ namespace Template
 		int vertexBufferId;                     // vertex buffer
 		int triangleBufferId;                   // triangle buffer
 		int quadBufferId;                       // quad buffer
+		Matrix4 objectToWorld;                  // model view matrix
+		Matrix4 objectToScreen;
 
 		// constructor
 		public Mesh( string fileName )
 		{
 			MeshLoader loader = new MeshLoader();
 			loader.Load( this, fileName );
+			objectToWorld = Matrix4.CreateTranslation(0, 0, 0);
+			objectToScreen = Matrix4.CreateTranslation(0, 0, 0);
 		}
 
 		// initialization; called during first render
@@ -48,7 +53,7 @@ namespace Template
 		}
 
 		// render the mesh using the supplied shader and matrix
-		public void Render( Shader shader, Matrix4 objectToWorld, Matrix4 objectToScreen, Texture texture, ref LightGroup lightGroup)
+		public void Render( Shader shader, Matrix4 worldToScreen, Texture texture, ref LightGroup lightGroup)
 		{
 			// on first run, prepare buffers
 			Prepare( shader );
@@ -65,10 +70,12 @@ namespace Template
 			// enable shader
 			GL.UseProgram( shader.programID );
 
+			objectToScreen = objectToWorld * worldToScreen;
 			// pass transform to vertex shader
 			GL.UniformMatrix4(shader.uniform_objectToScreen, false, ref objectToScreen);
 			GL.UniformMatrix4(shader.uniform_objectToWorld, false, ref objectToWorld);
 
+			GL.Uniform3(shader.uniform_ambientLightColor, new Vector3(0.08f, 0.08f, 0.08f));
 			GL.Uniform3(shader.uniform_lightPosition0, lightGroup.getLightPosition(0));
 			GL.Uniform3(shader.uniform_lightColor0, lightGroup.getLightColor(0));
 			GL.Uniform3(shader.uniform_lightPosition1, lightGroup.getLightPosition(1));
@@ -131,5 +138,10 @@ namespace Template
 		{
 			public int Index0, Index1, Index2, Index3;
 		}
+
+		public void setObjectToWorldMatrix(Matrix4 ObjectToWorld)
+        {
+			objectToWorld = ObjectToWorld;
+        }
 	}
 }

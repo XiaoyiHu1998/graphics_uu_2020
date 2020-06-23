@@ -11,6 +11,8 @@ out vec4 outputColor;
 
 uniform mat4 objectToWorld;
 
+uniform vec3 ambientLightColor;
+
 uniform vec3 lightPosition0;
 uniform vec3 lightColor0;
 
@@ -78,7 +80,7 @@ void main()
 
     outputColor = vec4(
                 2 * totalDiffuseLightColor
-                + 0.05f * materialColor
+                + vec3(ambientLightColor.x * materialColor.x, ambientLightColor.y * materialColor.y, ambientLightColor.z * materialColor.z)
                 + totalSpecularLightColor
                 , 1
     );

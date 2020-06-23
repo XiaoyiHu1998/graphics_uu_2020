@@ -19,7 +19,7 @@ namespace Template
 					return true;
 				}
 			}
-			catch { return false; }
+			catch { System.Console.WriteLine("Failed to load mesh."); return false; }
 		}
 
 		char[] splitCharacters = new char[] { ' ' };

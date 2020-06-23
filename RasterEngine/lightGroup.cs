@@ -74,7 +74,7 @@ namespace INFOGR2019Tmpl8
         {
             frameDuration = timer.ElapsedMilliseconds;
             timer.Reset();
-
+            
             angle += 0.001f * frameDuration;
             if (angle > 2 * PI) angle -= 2 * PI;
             

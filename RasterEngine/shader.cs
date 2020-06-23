@@ -13,6 +13,7 @@ namespace Template
 		public int attribute_vuvs;
 		public int uniform_objectToScreen;
 		public int uniform_objectToWorld;
+		public int uniform_ambientLightColor;
 
 		public int uniform_lightPosition0;
 		public int uniform_lightColor0;
@@ -39,6 +40,7 @@ namespace Template
 			attribute_vuvs = GL.GetAttribLocation( programID, "vUV" );
 			uniform_objectToScreen = GL.GetUniformLocation(programID, "objectToScreen");
 			uniform_objectToWorld = GL.GetUniformLocation(programID, "objectToWorld");
+			uniform_ambientLightColor = GL.GetUniformLocation(programID, "ambientLightColor");
 
 			uniform_lightPosition0 = GL.GetUniformLocation(programID, "lightPosition0");
 			uniform_lightColor0 = GL.GetUniformLocation(programID, "lightColor0");

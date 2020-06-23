@@ -14,6 +14,7 @@ namespace INFOGR2019Tmpl8
     {
         Matrix4 objectToWorld;
         Matrix4 worldToScreen;
+        LightGroup lightGroup;
         List<GraphNode> collections;
 
         public SceneGraph(Matrix4 ObjectToWorld, Matrix4 WorldToScreen)
@@ -21,11 +22,12 @@ namespace INFOGR2019Tmpl8
             objectToWorld = ObjectToWorld;
             worldToScreen = WorldToScreen;
             collections = new List<GraphNode>();
+            lightGroup = new LightGroup();
         }
 
         public void addCollection(RenderObject renderObject)
         {
-            collections.Add(new GraphNode(objectToWorld, 0));
+            collections.Add(new GraphNode(Matrix4.CreateTranslation(0,0,0), Matrix4.CreateScale(1,1,1), Matrix4.CreateRotationX(0), 0));
             collections[collections.Count - 1].addRenderObjectToLayer(renderObject, 0);
         }
 
@@ -34,29 +36,51 @@ namespace INFOGR2019Tmpl8
             collections[rootChild].addRenderObjectToLayer(renderObject, targetLayer);
         }
 
-        public void transformCollectionOnLayer(Matrix4 transform, int rootChild, int targetLayer)
-        {
-            collections[rootChild].transformLayer(transform, targetLayer);
-        }
-
-        public void transformScene(Matrix4 transform)
-        {
-            foreach(GraphNode node in collections)
-            {
-                node.transformLayer(transform, 0);
-            }
-        }
-
         public void setWorldToScreenMatrix(Matrix4 newMatrix)
         {
             worldToScreen = newMatrix;
         }
 
-        public void Render(ref LightGroup lightGroup)
+        public void Render()
         {
-            foreach(GraphNode node in collections)
+            lightGroup.updateLights();
+            foreach (GraphNode node in collections)
             {
                 node.render(worldToScreen, ref lightGroup);
+            }
+        }
+
+        public void setTranslation(Matrix4 Translation, int collectionID, int targetLayer)
+        {
+            collections[collectionID].setTranslation(Translation, targetLayer);
+        }
+        public void setRotation(Matrix4 Rotation, int collectionID, int targetLayer)
+        {
+            collections[collectionID].setRotation(Rotation, targetLayer);
+        }
+        public void setScale(Matrix4 Scale, int collectionID, int targetLayer)
+        {
+            collections[collectionID].setScale(Scale, targetLayer);
+        }
+        public void setTranslationGlobal(Matrix4 Translation)
+        {
+            foreach (GraphNode collection in collections)
+            {
+                collection.setTranslation(Translation, 0);
+            }
+        }
+        public void setRotationGlobal(Matrix4 Rotation)
+        {
+            foreach (GraphNode collection in collections)
+            {
+                collection.setRotation(Rotation, 0);
+            }
+        }
+        public void setScaleGlobal(Matrix4 Scale)
+        {
+            foreach (GraphNode collection in collections)
+            {
+                collection.setScale(Scale, 0);
             }
         }
 

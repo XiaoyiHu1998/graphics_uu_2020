@@ -12,49 +12,38 @@ namespace INFOGR2019Tmpl8
     class GraphNode
     {
         int layer;
-        Matrix4 transform;
+        bool dirtyFlag;
+        Matrix4 objectToWorld;
+        Matrix4 translation;
+        Matrix4 scale;
+        Matrix4 rotation;
         List<GraphNode> child;
         List<RenderObject> objects;
 
-        public GraphNode(Matrix4 matrix, int Layer)
+        public GraphNode(Matrix4 Translation, Matrix4 Rotation, Matrix4 Scale, int Layer)
         {
             layer = Layer;
-            transform = matrix;
+            translation = Translation;
+            rotation = Rotation;
+            scale = Scale;
+            objectToWorld = translation * rotation * scale;
             child = new List<GraphNode>();
             objects = new List<RenderObject>();
-        }
 
-        public void transformLayer(Matrix4 transformMatrix, int targetLayer)
-        {
-            if(layer == targetLayer)
-            {
-                transformNodeAndChildren(transformMatrix);
-            }
-            else if(targetLayer > layer && child.Count > 0)
-            {
-                child[0].transformLayer(transformMatrix, targetLayer);
-            }
-        }
-
-        private void transformNodeAndChildren(Matrix4 transformMatrix)
-        {
-            transform *= transformMatrix;
-            if(child.Count > 0)
-            {
-                child[0].transformNodeAndChildren(transformMatrix);
-            }
+            dirtyFlag = false;
         }
 
         public void addRenderObjectToLayer(RenderObject renderObject, int targetLayer)
         {
             if(targetLayer > layer && child.Count == 0)
             {
-                child.Add(new GraphNode(transform, layer + 1));
+                child.Add(new GraphNode(translation, rotation, scale, layer + 1));
                 child[0].addRenderObjectToLayer(renderObject, targetLayer);
             }
             if (layer == targetLayer)
             {
                 objects.Add(renderObject);
+                objects[objects.Count - 1].SetObjectToWorldMatrix(objectToWorld);
             }
             else
             {
@@ -64,13 +53,58 @@ namespace INFOGR2019Tmpl8
 
         public void render(Matrix4 worldToScreen, ref LightGroup lightGroup)
         {
+            if (dirtyFlag)
+            {
+                objectToWorld = translation * rotation * scale;
+                foreach (RenderObject renderObject in objects)
+                {
+                    renderObject.SetObjectToWorldMatrix(objectToWorld);
+                }
+            }
             foreach(RenderObject renderObject in objects)
             {
-                renderObject.render(transform, worldToScreen, ref lightGroup);
+                renderObject.render(worldToScreen, ref lightGroup);
             }
             if(child.Count > 0)
             {
                 child[0].render(worldToScreen, ref lightGroup);
+            }
+        }
+
+        public void setTranslation(Matrix4 Translation, int targetLayer)
+        {
+            if(layer >= targetLayer)
+            {
+                translation *= Translation;
+                dirtyFlag = true;
+            }
+            if(child.Count > 0)
+            {
+                child[0].setTranslation(Translation, targetLayer);
+            }
+        }
+        public void setRotation(Matrix4 Rotation, int targetLayer)
+        {
+            if (layer >= targetLayer)
+            {
+                rotation *= Rotation;
+                dirtyFlag = true;
+            }
+            if (child.Count > 0)
+            {
+                child[0].setRotation(Rotation, targetLayer);
+            }
+        }
+        public void setScale(Matrix4 Scale, int targetLayer)
+        {
+            if (layer >= targetLayer)
+            {
+                scale *= Scale;
+                dirtyFlag = true;
+            }
+            if (child.Count > 0)
+            {
+                child[0].setScale(Scale, targetLayer);
             }
         }
     }
